@@ -6,12 +6,26 @@ app.config(function($routeProvider)  {
     // homepage
         .when('/', {
             // this is a template
-            template: '<h1>This is the default route</h1>'
+            template: '<h1>This is the home <page></page></h1>'
         })
-        // about
+        // logIn
         .when('/LogIn', {
             // this is a template url
             templateUrl: 'logIn.html',
+            // controller : 'aboutController as abtCtrl'
+        })
+
+        // Register
+        .when('/Register', {
+            // this is a template url
+            templateUrl: 'register.html',
+            // controller : 'aboutController as abtCtrl'
+        })
+
+        // Register
+        .when('/View', {
+            // this is a template url
+            templateUrl: 'randomPics.html',
             // controller : 'aboutController as abtCtrl'
         })
         // // poi
