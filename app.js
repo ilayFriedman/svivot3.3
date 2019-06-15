@@ -22,8 +22,8 @@ app.config(function($routeProvider)  {
             // controller : 'aboutController as abtCtrl'
         })
 
-        // Register
-        .when('/View', {
+        // POI
+        .when('/randomPics', {
             // this is a template url
             templateUrl: 'randomPics.html',
             // controller : 'aboutController as abtCtrl'
