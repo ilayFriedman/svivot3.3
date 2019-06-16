@@ -44,3 +44,8 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.validtionErrors{
+    color: red;
+    font-size: 11px;
+}
