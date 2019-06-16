@@ -1,42 +1,32 @@
 angular.module("myApp")
-    .controller("registerController", function ($scope) {
-        function loadXMLDoc() {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    myFunction(this);
-                }
-            };
-            xmlhttp.open("GET", "./countries.xml", true);
-            xmlhttp.send();
-        }
-        loadXMLDoc();
+    .controller("registerController", function ($scope, $http) {
+        $scope.submit = function () {
+            var x =  document.getElementById("categories");
+            let selectedValues = Array.from(x.selectedOptions).map(option => option.value)
+            var curr = x.options;
+            for (var i =0 ; i<selectedValues.length; i++){
+                $scope.answer = "Submitted! you entered: " + selectedValues[i];
+                console.log(selectedValues[i]);
 
-        function myFunction(xml) {
-            var x, i, xmlDoc, txt;
-            xmlDoc = xml.responseXML;
-            txt = [];
-            x = xmlDoc.getElementsByTagName("Name");
-            for (i = 0; i < x.length; i++) {
-                txt.push(x[i].childNodes[0].nodeValue)
-                console.log(txt[i]);
+
             }
-            // document.getElementById("demo").innerHTML = txt[0];
-            console.log(txt);
-            var x = document.getElementById("countries");
-            for (var i = 0; i < txt.length; i++) {
-                var option = document.createElement("option");
-                option.value = txt[i];
-                option.text = txt[i];
-                x.appendChild(option);
+            console.log($scope.categories.toString());
+
+            var jsonToAns ={
+                username: $scope.username,
+                password: $scope.psw,
+                passQuestion: [{q: $scope.Q1, ans: $scope.A1}, {q:$scope.Q2, ans: $scope.A2}],
+                city: $scope.city,
+                country: $scope.countries,
+                email: $scope.email,
+                firstName: $scope.Fname,
+                lastName: $scope.Lname,
+                categories: $scope.categories
             }
-        }
-
-
-
-        $scope.submit = function(){
-            $scope.answer = "Submitted! you entered: " + $scope.uname
         };
 
 
-    });
+    })
+
+//{"username": String, "password": String, "passQuestion":{"q": String, "ans": String},
+// "city": String, "country": String, "e-mail": String, "firstName" :String, "lastName": String, "categories": string[]}
