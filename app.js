@@ -11,7 +11,7 @@ app.config(function($routeProvider)  {
         // logIn
         .when('/LogIn', {
             // this is a template url
-            templateUrl: 'logIn.html',
+            templateUrl: 'logIn.html'
             // controller : 'aboutController as abtCtrl'
         })
 
@@ -19,7 +19,7 @@ app.config(function($routeProvider)  {
         .when('/Register', {
             // this is a template url
             templateUrl: 'register.html',
-            // controller : 'aboutController as abtCtrl'
+            controller : 'registerController as regCtrl'
         })
 
         // POI

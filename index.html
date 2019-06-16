@@ -28,13 +28,14 @@
   <!-- load angular -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
   <script src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!-- load app -->
   <script src="app.js"></script>
 
-  <!-- load controllers -->
-  <!--<script src="pages/about/aboutController.js"></script>-->
-  <!--<script src="pages/poi/poiController.js"></script>-->
+<!--   load controllers-->
+  <script src="registerController.js"></script>
+<!--  <script src="pages/poi/poiController.js"></script>-->
   <!--<script src="pages/http/httpController.js"></script>-->
 
 
@@ -51,12 +52,13 @@
 	          <li class="nav-item"><a href="#!LogIn" class="nav-link"><span>Log In</span></a></li>
 	          <li class="nav-item"><a href="#!Register" class="nav-link"><span>Register</span></a></li>
 	          <li class="nav-item"><a href="#!randomPics" class="nav-link"><span>View Points</span></a></li>
-	          <li class="nav-item"><a href="#" class="nav-link"><span>My Favorits</span></a></li>
+	          <li class="nav-item"><a href="#" class="nav-link"><span>My Favorites</span></a></li>
 	        </ul>
 	      </div>
 	    </div>
 	  </nav>
-	  
+
+
 	  <section id="home-section" class="hero" ng-view>
 
 
@@ -73,7 +75,7 @@
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+<!--  <script src="js/bootstrap.min.js"></script>-->
   <script src="js/jquery.easing.1.3.js"></script>
   <script src="js/jquery.waypoints.min.js"></script>
   <script src="js/jquery.stellar.min.js"></script>
@@ -82,10 +84,48 @@
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+<!--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>-->
   <script src="js/google-map.js"></script>
 
   <script src="js/main.js"></script>
 
   </body>
 </html>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        function loadXMLDoc() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    myFunction(this);
+                }
+            };
+            xmlhttp.open("GET", "./countries.xml", true);
+            xmlhttp.send();
+        }
+        loadXMLDoc();
+        function myFunction(xml) {
+            var x, i, xmlDoc, txt;
+            xmlDoc = xml.responseXML;
+            txt = [];
+            x = xmlDoc.getElementsByTagName("Name");
+            for (i = 0; i < x.length; i++) {
+                txt.push(x[i].childNodes[0].nodeValue)
+                //console.log(txt[i]);
+            }
+            // document.getElementById("demo").innerHTML = txt[0];
+            console.log(txt);
+            var x = document.getElementById("countries");
+            for (var i = 0; i < txt.length; i++) {
+                var option = document.createElement("option");
+                option.value = txt[i];
+                option.text = txt[i];
+                x.appendChild(option);
+            }
+        }
+    });
+</script>
