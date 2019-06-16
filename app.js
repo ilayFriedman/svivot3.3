@@ -6,13 +6,15 @@ app.config(function($routeProvider)  {
     // homepage
         .when('/', {
             // this is a template
-            template: '<h1>This is the home <page></page></h1>'
+            templateUrl: 'openPage.html',
+            controller : 'indexController as indexCtrl'
         })
+
         // logIn
         .when('/LogIn', {
             // this is a template url
-            templateUrl: 'logIn.html'
-            // controller : 'aboutController as abtCtrl'
+            templateUrl: 'logIn.html',
+            controller : 'LoginController as LoginCtrl'
         })
 
         // Register
@@ -22,21 +24,15 @@ app.config(function($routeProvider)  {
             controller : 'registerController as regCtrl'
         })
 
-        // POI
-        .when('/randomPics', {
-            // this is a template url
-            templateUrl: 'randomPics.html',
-            // controller : 'aboutController as abtCtrl'
+        // poi
+        .when('/POIS', {
+            templateUrl: 'POIS.html',
+            controller : 'POISController as POISCtrl'
         })
-        // // poi
-        // .when('/poi', {
-        //     templateUrl: 'pages/poi/poi.html',
-        //     controller : 'poiController as poiCtrl'
-        // })
-        // .when('/httpRequest', {
-        //     templateUrl: 'pages/http/request.html',
-        //     controller : 'httpController as httpCtrl'
-        // })
+        .when('/Favorites', {
+            templateUrl: 'Favorites.html',
+            controller : 'FavoritesController as FavoritesCtrl'
+        })
 
 
         // other
