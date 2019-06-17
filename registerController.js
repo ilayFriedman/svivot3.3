@@ -1,18 +1,7 @@
 angular.module("myApp")
-    .controller("registerController", function ($scope, $http) {
+    .controller("registerController", ['$scope', '$http', '$window', function ($scope, $http, $window) {
         $scope.submit = function () {
-            var x =  document.getElementById("categories");
-            let selectedValues = Array.from(x.selectedOptions).map(option => option.value)
-            var curr = x.options;
-            for (var i =0 ; i<selectedValues.length; i++){
-                $scope.answer = "Submitted! you entered: " + selectedValues[i];
-                console.log(selectedValues[i]);
-
-
-            }
-            console.log($scope.categories.toString());
-
-            var jsonToAns ={
+            const jsonToAns ={
                 username: $scope.username,
                 password: $scope.psw,
                 passQuestion: [{q: $scope.Q1, ans: $scope.A1}, {q:$scope.Q2, ans: $scope.A2}],
@@ -23,10 +12,30 @@ angular.module("myApp")
                 lastName: $scope.Lname,
                 categories: $scope.categories
             }
-        };
 
+            // Http connection
+            const url = `${localUrl}/Register`;
+            const data = jsonToAns;
+            $http.post(url, data).then($scope.successRegister, $scope.errorRegister);
+        }
+        $scope.successRegister = function(response){
+            if(response.status == 200){
+                alert("Successfully Registered! you can now log in.")
+            }
+            else{
+                $scope.errorRegister("");
+            }
+        }
 
-    })
+        $scope.errorRegister = function (errorResponse) {
+            if(errorResponse && (errorResponse.status == 500 || errorResponse.status == 400)){
+                $scope.errors =  [{ key: 'errorInLogin', value: errorResponse.data }];
+            }
+            else
+                $scope.errors =  [{ key: 'errorInLogin', value: 'Oops we have a problem. Please try again later.'}];
+        }
+
+    }])
 
 //{"username": String, "password": String, "passQuestion":{"q": String, "ans": String},
 // "city": String, "country": String, "e-mail": String, "firstName" :String, "lastName": String, "categories": string[]}

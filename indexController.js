@@ -1,13 +1,15 @@
 
-angular.module("myApp").controller("indexController", function ($scope) {
-    $scope.connetionStatus = function() {
-        return true;
+angular.module("myApp").controller("indexController", ['$scope', '$http', '$window', function ($scope, $http, $window) {
+    $scope.connectionStatus = function() {
+        if($window.loged){
+            return true;
+        }
+        else{ return false;}
     };
 
-
     $scope.helloName = function() {
-        if($scope.connetionStatus()){   // connected!!
-            return "DEAR OREN!";
+        if($scope.connectionStatus()){   // connected!!
+            return $window.sessionStorage.full_name;
         }else{
             return "Guest";     // not connected!
         };
@@ -16,5 +18,5 @@ angular.module("myApp").controller("indexController", function ($scope) {
 
 
 
-});
+}]);
 
