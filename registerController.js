@@ -4,7 +4,7 @@ angular.module("myApp")
             const jsonToAns ={
                 username: $scope.username,
                 password: $scope.psw,
-                passQuestion: [{q: $scope.Q1, ans: $scope.A1}, {q:$scope.Q2, ans: $scope.A2}],
+                passQuestion: [{q:'elementary school', ans: $scope.Q1}, {q:'mommys mother', ans: $scope.Q2}],
                 city: $scope.city,
                 country: $scope.countries,
                 email: $scope.email,

@@ -14,7 +14,7 @@ app.config(function($routeProvider)  {
         .when('/LogIn', {
             // this is a template url
             templateUrl: 'logIn.html',
-            controller : 'LoginController as LoginCtrl'
+            controller : 'LoginController as loginCtrl'
         })
 
         // Register
