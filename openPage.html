@@ -1,12 +1,19 @@
-<div>
-    <table border="1">
-        <tr>
-            <td>
-                shit1
-            </td>
-            <td>
-                shit2
-            </td>
-        </tr>
-    </table>
+<div style="padding-top:5%; width:50%; padding-left: 3%;">
+
+    <div ng-repeat="poi in POIs">
+        <div id="poi_Div" style="border: solid">
+            <h1>{{poi.NamePOI}} <span><button ng-click="onclick(poi, $index)">Get more information</button></span></h1>
+            <span><img ng-src="{{poi.Picture}}" height="200" width="400"></span>
+        </div>
+
+    </div>
+
+    <div id="details" class="modal">
+        <button id="closeDet1">&times;</button>
+        <span id="det1" ng-bind-html="name1" ng-show="clicked1"></span>
+        <span id="det2" class="modal-content" ng-bind-html="name2" ng-show="clicked2"></span>
+        <span id="det3" class="modal-content" ng-bind-html="name3" ng-show="clicked3"></span>
+    </div>
+
+
 </div>

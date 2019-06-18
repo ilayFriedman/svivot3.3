@@ -1,57 +1,116 @@
 angular.module("myApp")
-    .controller("POISController", ['$scope', '$http', '$window', function ($scope, $http, $window) {
-        $scope.clicked = false;
+    .controller("POISController", ['$scope', '$http', '$window', '$sce', function ($scope, $http, $window, $sce) {
+        $scope.clicked1 = false;
+        $scope.clicked2 = false;
+        $scope.clicked3 = false;
+        $scope.categoryJSON = {
+            1: "Architecture",
+            2: "Museums",
+            3: "Shopping",
+            4: "Restaurants"
+        }
         const url = `${localUrl}/getRandomPOI`;
         $http.get(url).then(successRandom, errorRandom);
 
+        $scope.POIs;
 
         function successRandom(response) {
             $scope.POIs = response.data;
         }
 
+
         function errorRandom(response) {
-            alert("ASDFsdf")
+            alert("Error in DB")
         }
 
-        $scope.onclick = function () {
-            $scope.clicked = true;
-        }
+        $scope.onclick = function (poi, index) {
+            var closeBtn = document.getElementById("closeDet1");
+            if(index == 0){
+                if($scope.clicked1 == false){
+                    $scope.name1 = $sce.trustAsHtml('<p class="modal-content">' +
+                        '<br>' +
+                        'Category: ' + $scope.categoryJSON[Number(poi.CategoryID)] +
+                        '<br>' +
+                        'Location: ' + poi.Location +
+                        '<br>' +
+                        'Details: ' + poi.Details +
+                        '<br>' +
+                        'Rank: ' + poi.Rank +
+                        '<br>' +
+                        'Number Of Viewers: ' + poi.NumOfViews + '<br></p>');
+                    var det1 = document.getElementById('details');
+                    det1.style.display = "block";
 
-
-        // clickable divs:
-        $scope.poiDiv = document.getElementById("poi_Div");
-
-        //When the user clicks the button, open the modal
-
-        // $scope.onclick = function(NamePOI) {
-        //     // $scope.divText = '<span class="close">&times;</span><h2>'+$scope.POIs[0].NamePOI+'</h2><br><br><p id="content">Category: {{poi.CategoryID}}<br>{{poi.Location}}<br>{{poi.Details}}<br>Rank: {{poi.Rank}}<br>Number Of Viewers: {{poi.numOfViews}}br></p>';
-        //     // document.getElementById("poiName").innerHTML = $scope.POIs[NamePOI].NamePOI;
-        //     $scope.divToShow = null;
-        //     $scope.divToShow = document.getElementById("divTOshow");
-        //     $scope.divToShow.style.display = "block";
-        // }
-        var span = document.getElementsByClassName("close");
-        // When the user clicks on <span> (x), close the modal
-
-        span.onclick = function() {
-            $scope.divToShow = document.getElementById("divTOshow");
-            $scope.divToShow.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            $scope.divToShow = document.getElementById("divTOshow");
-            if (event.target == $scope.divToShow) {
-
-                $scope.divToShow.style.display = "none";
+                    $scope.clicked2 = false;
+                    $scope.clicked3 = false;
+                    $scope.clicked1 = true;
+                    closeBtn.onclick = function() {
+                        det1.style.display = "none";
+                    }
+                }
+                else{
+                    $scope.clicked1 = false;
+                }
             }
-        }
-        window.addEventListener("keydown", function(event){
-            if(event.code == "Escape"){
-                $scope.divToShow = document.getElementById("divTOshow");
-                $scope.divToShow.style.display = "none";
-            }
-        });
+            else if (index == 1){
+                if($scope.clicked2 == false){
+                    $scope.name2 = $sce.trustAsHtml('<p class="modal-content"> ' +
+                        '<br>' +
+                        'Category: ' + $scope.categoryJSON[Number(poi.CategoryID)] +
+                        '<br>' +
+                        'Location: ' + poi.Location +
+                        '<br>' +
+                        'Details: ' + poi.Details +
+                        '<br>' +
+                        'Rank: ' + poi.Rank +
+                        '<br>' +
+                        'Number Of Viewers: ' + poi.NumOfViews +
+                        '<br>' +
+                        '</p>');
+                    var det2 = document.getElementById('details');
+                    det2.style.display = "block";
+                    $scope.clicked1 = false;
+                    $scope.clicked3 = false;
+                    $scope.clicked2 = true;
 
-        // $scope.POIs = response.data;
+                    closeBtn.onclick = function() {
+                        det2.style.display = "none";
+                    }
+
+                }
+                else{
+                    $scope.clicked2 = false;
+                }
+            }
+            else if (index == 2){
+                if($scope.clicked3 == false){
+                    $scope.name3 = $sce.trustAsHtml('<p class="modal-content"> ' +
+                        '<br>' +
+                        'Category: ' + $scope.categoryJSON[Number(poi.CategoryID)] +
+                        '<br>' +
+                        'Location: ' + poi.Location +
+                        '<br>' +
+                        'Details: ' + poi.Details +
+                        '<br>' +
+                        'Rank: ' + poi.Rank +
+                        '<br>' +
+                        'Number Of Viewers: ' + poi.NumOfViews+'<br></p>');
+                    var det3 = document.getElementById('details');
+                    det3.style.display = "block";
+                    $scope.clicked1 = false;
+                    $scope.clicked2 = false;
+                    $scope.clicked3 = true;
+
+                    closeBtn.onclick = function() {
+                        det3.style.display = "none";
+                    }
+                }
+                else{
+                    $scope.clicked3 = false;
+                }
+            }
+
+
+        }
+
     }]);

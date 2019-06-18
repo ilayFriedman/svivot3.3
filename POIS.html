@@ -1,33 +1,18 @@
 <div style="padding-top:5%; width:50%; padding-left: 3%;">
 
-
     <div ng-repeat="poi in POIs">
-        <div id="poi_Div" style="border: solid" ng-click="onclick()">
-            <h1>{{poi.NamePOI}}</h1>
-            <p>{{poi.Location}}</p>
-            <span><img src="poi.Picture" height="200" width="200"></span>
+        <div id="poi_Div" style="border: solid">
+            <h1>{{poi.NamePOI}} <span><button ng-click="onclick(poi, $index)">Get more information</button></span></h1>
+            <span><img ng-src="{{poi.Picture}}" height="200" width="400"></span>
+        </div>
 
-<!--            <div id="divTOshow" class="modal" ng-show="clicked">-->
-<!--                <div class="modal-content" ng-bind-html="divText">-->
-<!--                    <span class="close">&times;</span>-->
-<!--                    <h2 id="poiName"></h2><br><br>-->
-<!--                    <p id="categoryP">-->
-<!--                        Category: {{poi.CategoryID}}-->
-<!--                        <br>-->
-<!--                        {{poi.Location}}-->
-<!--                        <br>-->
-<!--                        {{poi.Details}}-->
-<!--                        <br>-->
-<!--                        Rank: {{poi.Rank}}-->
-<!--                        <br>-->
-<!--                        Number Of Viewers: {{poi.numOfViews}}-->
-<!--                        <br>-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--        </div>-->
     </div>
 
-
+    <div id="details" class="modal">
+        <button id="closeDet1">&times;</button>
+        <span id="det1" ng-bind-html="name1" ng-show="clicked1"></span>
+        <span id="det2" class="modal-content" ng-bind-html="name2" ng-show="clicked2"></span>
+        <span id="det3" class="modal-content" ng-bind-html="name3" ng-show="clicked3"></span>
     </div>
 
 
