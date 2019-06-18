@@ -20,6 +20,7 @@ angular.module("myApp")
         }
         $scope.successRegister = function(response){
             if(response.status == 200){
+                $window.location.href = "#!/LogIn"
                 alert("Successfully Registered! you can now log in.")
             }
             else{

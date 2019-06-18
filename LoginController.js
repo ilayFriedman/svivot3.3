@@ -1,6 +1,6 @@
 const localUrl = 'http://localhost:3000';
 angular.module("myApp")
-    .controller("LoginController", ['$scope', '$http', '$window', function ($scope, $http, $window) {
+    .controller("LoginController", ['$scope', '$http', '$window','$rootScope','$location', function ($scope, $http, $window,$rootScope,$location) {
         $window.loged = false;
         $scope.resPass = false;
         $scope.showLoginForm = true;
@@ -15,12 +15,6 @@ angular.module("myApp")
             const data = {username: $scope.username, question: $scope.questions, answer: $scope.answer};
             $http.post(url, data).then($scope.successRestore, $scope.errorRestore);
         }
-        //
-        // var btnRestore = document.getElementById("restore_password");
-        // btnRestore.onclick = function () {
-        //
-        //     // $scope.restoreDiv.style.display = "none";
-        // }
         $scope.goToRestore = function(){
             $scope.resPass = true;
             $scope.showLoginForm = false;
@@ -37,7 +31,9 @@ angular.module("myApp")
                 $window.sessionStorage.setItem('token', response.data.token);
                 $window.sessionStorage.setItem('full_name', response.data.full_name);
                 $window.loged = true;
-                $scope.getHelloName();
+                $rootScope.welcomePath = '#!LogInHome'
+                // $window.location.href = "#!/LogInHome"
+                $location.url('/LogInHome');
             } else {
                 $scope.errorLogin("");
             }
@@ -57,12 +53,12 @@ angular.module("myApp")
             alert(errorResponse.data)
         }
 
-
-
-        $scope.getHelloName = function () {
-            if ($window.loged) {
-                return $window.sessionStorage.full_name;
-            } else return "Guest";
-        }
+        //
+        //
+        // $scope.getHelloName = function () {
+        //     if ($window.loged) {
+        //         return $window.sessionStorage.full_name;
+        //     } else return "Guest";
+        // }
 
     }]);

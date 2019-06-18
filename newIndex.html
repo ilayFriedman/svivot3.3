@@ -22,12 +22,13 @@
 <script src="FavoritesController.js"></script>
 <script src="POISController.js"></script>
 <script src="LoginController.js"></script>
+<script src="LoginHomeController.js"></script>
 
 
 
 <!--navigateBar-->
 <nav class="nav">
-    <a href="# "><span class="spanNav">Home</span></a>
+    <a href="# "><span class="spanNav" ng-init="welcomePath = '#!/'" ng-href={{welcomePath}}>Home</span></a>
     <a href="#!LogIn"><span class="spanNav">Log In</span></a>
     <a href="#!Register"><span class="spanNav">Register</span></a>
     <a href=""><span class="spanNav" id="Mabout">About</span></a>

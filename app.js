@@ -9,6 +9,11 @@ app.config(function($routeProvider)  {
             templateUrl: 'openPage.html',
             controller : 'indexController as indexCtrl'
         })
+        // .when('/', {
+        //     // this is a template
+        //     templateUrl: 'LoginHome.html',
+        //     controller : 'indexController as indexCtrl'
+        // })
 
         // logIn
         .when('/LogIn', {
@@ -16,6 +21,11 @@ app.config(function($routeProvider)  {
             templateUrl: 'logIn.html',
             controller : 'LoginController as loginCtrl'
         })
+        .when('/LogInHome', {
+        // this is a template url
+        templateUrl: 'loginHome.html',
+        controller : 'LoginHomeController as loginHomeCtrl'
+    })
 
         // Register
         .when('/Register', {

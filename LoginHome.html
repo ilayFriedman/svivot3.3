@@ -1,0 +1,25 @@
+<div>
+    <h1>Most Popular POI:</h1>
+    <div ng-repeat="mostPoi in mostPOIs | limitTo:2">
+        <div style="border: solid">
+            <h1>{{mostPoi.NamePOI}} <span>
+                    <button ng-click="onclick(mostPoi, $index,2)">Get more information</button>
+                </span>
+            </h1>
+            <span><img ng-src="{{mostPoi.Picture}}" height="200" width="400"></span>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h1>Your recent favorites POI:</h1>
+    <div ng-repeat="LastPoi in LastPOIs | limitTo:2">
+        <div style="border: solid">
+            <h1>{{LastPoi.NamePOI}} <span>
+                    <button ng-click="onclick(LastPoi, $index,2)">Get more information</button>
+                </span>
+            </h1>
+            <span><img ng-src="{{LastPoi    .Picture}}" height="200" width="400"></span>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 angular.module("myApp").controller("indexController", ['$scope', '$http', '$window', '$sce', function ($scope, $http, $window, $sce) {
-    const url = `${localUrl}/getRandomPOI`;
-    $http.get(url).then(successRandom, errorRandom);
+
+    // Login checker
     $scope.connectionStatus = function () {
         if ($window.loged) {
             return true;
@@ -11,13 +11,15 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
 
     $scope.helloName = function () {
         if ($scope.connectionStatus()) {   // connected!!
+
             return $window.sessionStorage.full_name;
         } else {
             return "Guest";     // not connected!
         }
         ;
     };
-
+    $scope.donePost = false;
+    // random POI:
     $scope.clicked1 = false;
     $scope.clicked2 = false;
     $scope.clicked3 = false;
@@ -27,24 +29,23 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
         3: "Shopping",
         4: "Restaurants"
     }
-
-
     $scope.POIs;
+    const url = `${localUrl}/getRandomPOI`;
+    $http.get(url).then(successRandom, errorRandom);
 
     function successRandom(response) {
         $scope.POIs = response.data;
     }
 
-
     function errorRandom(response) {
-        alert("Error in DB")
+        alert(response.data)
     }
 
-    $scope.onclick = function (poi, index) {
+    $scope.onclick = function (poi, index, type) {
         var closeBtn = document.getElementById("closeDet1");
-        if (index == 0) {
-            if ($scope.clicked1 == false) {
-                $scope.name1 = $sce.trustAsHtml('<p class="modal-content">' +
+        var det = document.getElementById('details');
+            if (index == 0) {
+                $scope.name1 = $sce.trustAsHtml('<div class="modal-content"><h1>' + poi.NamePOI + '</h1><p>' +
                     '<br>' +
                     'Category: ' + $scope.categoryJSON[Number(poi.CategoryID)] +
                     '<br>' +
@@ -54,22 +55,29 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
                     '<br>' +
                     'Rank: ' + poi.Rank +
                     '<br>' +
-                    'Number Of Viewers: ' + poi.NumOfViews + '<br></p>');
-                var det1 = document.getElementById('details');
-                det1.style.display = "block";
-
+                    'Number Of Viewers: ' + poi.NumOfViews + '<br></p></div>');
+                //var det1 = document.getElementById('details');
+                det.style.display = "block";
                 $scope.clicked2 = false;
                 $scope.clicked3 = false;
                 $scope.clicked1 = true;
                 closeBtn.onclick = function () {
-                    det1.style.display = "none";
+                    det.style.display = "none";
                 }
-            } else {
-                $scope.clicked1 = false;
-            }
-        } else if (index == 1) {
-            if ($scope.clicked2 == false) {
-                $scope.name2 = $sce.trustAsHtml('<p class="modal-content"> ' +
+                window.onclick = function (event) {
+                    if (event.target == det) {
+                        det.style.display = "none";
+                    }
+                }
+                window.addEventListener("keydown", function (event) {
+                    if (event.code == "Escape") {
+                        det.style.display = "none";
+                    }
+                });
+
+            } else if (index == 1) {
+
+                $scope.name2 = $sce.trustAsHtml('<div class="modal-content"><h1>' + poi.NamePOI + '</h1><p> ' +
                     '<br>' +
                     'Category: ' + $scope.categoryJSON[Number(poi.CategoryID)] +
                     '<br>' +
@@ -81,23 +89,30 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
                     '<br>' +
                     'Number Of Viewers: ' + poi.NumOfViews +
                     '<br>' +
-                    '</p>');
-                var det2 = document.getElementById('details');
-                det2.style.display = "block";
+                    '</p></div>');
+
+                det.style.display = "block";
                 $scope.clicked1 = false;
                 $scope.clicked3 = false;
                 $scope.clicked2 = true;
 
                 closeBtn.onclick = function () {
-                    det2.style.display = "none";
+                    det.style.display = "none";
                 }
+                window.onclick = function (event) {
+                    if (event.target == det) {
+                        det.style.display = "none";
+                    }
+                }
+                window.addEventListener("keydown", function (event) {
+                    if (event.code == "Escape") {
+                        det.style.display = "none";
+                    }
+                });
 
-            } else {
-                $scope.clicked2 = false;
-            }
-        } else if (index == 2) {
-            if ($scope.clicked3 == false) {
-                $scope.name3 = $sce.trustAsHtml('<p class="modal-content"> ' +
+
+            } else if (index == 2) {
+                $scope.name3 = $sce.trustAsHtml('<div class="modal-content"><h1>' + poi.NamePOI + '</h1><p> ' +
                     '<br>' +
                     'Category: ' + $scope.categoryJSON[Number(poi.CategoryID)] +
                     '<br>' +
@@ -107,25 +122,36 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
                     '<br>' +
                     'Rank: ' + poi.Rank +
                     '<br>' +
-                    'Number Of Viewers: ' + poi.NumOfViews + '<br></p>');
-                var det3 = document.getElementById('details');
-                det3.style.display = "block";
+                    'Number Of Viewers: ' + poi.NumOfViews + '<br></p></div>');
+                // var det3 = document.getElementById('details');
+                det.style.display = "block";
                 $scope.clicked1 = false;
                 $scope.clicked2 = false;
                 $scope.clicked3 = true;
 
                 closeBtn.onclick = function () {
-                    det3.style.display = "none";
+                    det.style.display = "none";
                 }
-            } else {
-                $scope.clicked3 = false;
+                window.onclick = function (event) {
+                    if (event.target == det) {
+                        det.style.display = "none";
+                    }
+                }
+                window.addEventListener("keydown", function (event) {
+                    if (event.code == "Escape") {
+                        det.style.display = "none";
+                    }
+                });
             }
-        }
+
+
+
 
 
     }
 
-}]);
+
+}]); // controller end
 
 
 
