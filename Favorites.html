@@ -1,1 +1,35 @@
-<div>FAVORITES</div>
+<div style="padding-top:5%; width:50%; padding-left: 3%;">
+    <h1>Your Favorites POIs:</h1>
+
+    <div ng-repeat="poi in favorites">
+        <div style="border: solid">
+            <a ng-click="onclick(poi, 'myModalSearch')">
+                <header>
+                    <h3>{{poi.NamePOI}}</h3>
+                </header>
+                <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
+            <button ng-show="loged" ng-click="removeToFavorites(poi)">Remove To Favorites</button>
+            <!-- The Modal -->
+            <div id="myModalSearch{{poi.NamePOI}}" class="modal">
+                <!-- Modal content -->
+                <div>
+                    <div class="modal-content">
+                        <span ng-click="onXClickSearch(poi.NamePOI, 'myModalSearch')" class="close">&times;</span>
+                        <h3>{{poi.NamePOI}}</h3>
+                        <section>Category: {{categoryJSON[poi.CategoryID]}}
+                            <br>
+                            Rank: {{poi.Rank}}
+                            <br>
+                            Details: {{poi.Details}}
+                            <br>
+                            Number of Views: {{poi.NumOfViews}}
+                            <br>
+                            <span ng-bind-html="reviews"></span>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

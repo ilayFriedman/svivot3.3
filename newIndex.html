@@ -25,27 +25,21 @@
 <script src="LoginHomeController.js"></script>
 
 
-
 <!--navigateBar-->
 <nav class="nav">
-    <a  ng-init="welcomePath = '#!/';" ng-href={{welcomePath}}><span class="spanNav" >Home</span></a>
+    <a ng-init="welcomePath = '#!/';" ng-href={{welcomePath}}><span class="spanNav">Home</span></a>
     <a href="#!LogIn" ng-hide="loged"><span class="spanNav">Log In</span></a>
     <a href="#!Register" ng-hide="loged"><span class="spanNav">Register</span></a>
     <a href=""><span class="spanNav" id="Mabout">About</span></a>
     <a href="#!POIS"><span class="spanNav">View Points</span></a>
-    <a href="#!Favorites"><span class="spanNav">My Favorites</span></a>
+    <a href="#!Favorites" ng-show="loged"><span class="spanNav">My Favorites
+        <span ng-controller="LoginHomeController">{{getNum(3)}}</span>
+    </span></a>
     <span>Hello <span ng-controller="indexController">{{helloName()}}</span></span>
 
 </nav>
 <div class="explore" ng-view>
 </div>
-
-
-
-
-
-
-
 
 
 <!-- The Modal (ABOUT) -->
@@ -87,24 +81,24 @@
     var span = document.getElementsByClassName("close")[0];
 
     // When the user clicks the button, open the modal
-    btn.onclick = function() {
+    btn.onclick = function () {
         modal.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         var modal = document.getElementById('aboutModal');
         if (event.target === modal) {
             modal.style.display = "none";
         }
     }
-    window.addEventListener("keydown", function(event){
-        if(event.code == "Escape"){
+    window.addEventListener("keydown", function (event) {
+        if (event.code == "Escape") {
             modal.style.display = "none";
         }
     });

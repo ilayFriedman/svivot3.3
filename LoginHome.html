@@ -16,6 +16,7 @@
                 <div>
                     <div class="modal-content">
                         <span ng-click="onXClickM($index)" class="close">&times;</span>
+                        <h3>{{mostPoi.NamePOI}}</h3>
                         <section>Category: {{categoryJSON[mostPoi.CategoryID]}}
                             <br>
                             Rank: {{mostPoi.Rank}}
@@ -49,6 +50,7 @@
                 <div>
                     <div class="modal-content">
                         <span ng-click="onXClickL($index)" class="close">&times;</span>
+                        <h3>{{lastPoi.NamePOI}}</h3>
                         <section>Category: {{categoryJSON[lastPoi.CategoryID]}}
                             <br>
                             Rank: {{lastPoi.Rank}}

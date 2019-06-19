@@ -4,8 +4,24 @@ angular.module("myApp").controller("LoginHomeController", ['$scope', '$http', '$
         const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
         $http.post(`${localUrl}/private/mostUpdatedPois`, null, headers).then(successMost, errorMost);
         $http.post(`${localUrl}/private/lastSavedPois`, null, headers).then(successLast, errorLast);
+        $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then(successFavorites, errorFavorites);
+
     }
 
+    function successFavorites(response) {
+        $window.numOfFavorites = response.data.length;
+    }
+    $window.getNum = function (isUp) {
+        if(isUP === 1){
+            $window.numOfFavorites++;
+        }else if(isUp === 2){
+            $window.numOfFavorites--;
+        }
+        return  $window.numOfFavorites;
+    }
+    function errorFavorites(response) {
+        errorMost("");
+    }
 
     function successMost(response) {
         if (response && response.data) {
