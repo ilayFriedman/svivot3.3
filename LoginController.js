@@ -1,7 +1,7 @@
 const localUrl = 'http://localhost:3000';
 angular.module("myApp")
     .controller("LoginController", ['$scope', '$http', '$window','$rootScope','$location', function ($scope, $http, $window,$rootScope,$location) {
-        $window.loged = false;
+        $rootScope.loged = false;
         $scope.resPass = false;
         $scope.showLoginForm = true;
         $scope.restoredPsw;
@@ -30,7 +30,7 @@ angular.module("myApp")
             if (response && response.data && response.data.token && response.data.full_name) {
                 $window.sessionStorage.setItem('token', response.data.token);
                 $window.sessionStorage.setItem('full_name', response.data.full_name);
-                $window.loged = true;
+                $rootScope.loged = true;
                 $rootScope.welcomePath = '#!LogInHome'
                 // $window.location.href = "#!/LogInHome"
                 $location.url('/LogInHome');

@@ -1,0 +1,91 @@
+<div style="padding-top:5%; width:50%; padding-left: 3%;">
+
+    <span>
+<!--        <input type="text" name="searchValue" ng-model="searchValue" class="form-control" required>-->
+        <input type="radio" ng-model="myVar" value="category"> By Category
+        <input type="radio" ng-model="myVar" value="name">By Name
+        <input type="radio" ng-model="myVar" value="rank">By Rank
+        <br>
+        <br>
+    </span>
+    <div ng-switch="myVar">
+        <span ng-switch-when="category">
+            <select id="categories" name="categories" ng-model="categories">
+            <option value="1">Architecture</option>
+            <option value="2">Museums</option>
+            <option value="3">Shopping</option>
+            <option value="4">Restaurants</option>
+        </select>
+        </span>
+        <span ng-switch-when="name">
+            <input type="text" name="searchValue" ng-model="searchName" class="form-control">
+        </span>
+    </div>
+
+
+    <div ng-repeat="poi in allPOIs | searchPOI:searchName">
+        <div style="border: solid">
+            <a ng-click="onclick(poi)">
+                <header>
+                    <h3>{{poi.NamePOI}}</h3>
+                </header>
+                <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
+            <!-- The Modal -->
+            <div id="myModalSearch{{poi.NamePOI}}" class="modal">
+                <!-- Modal content -->
+                <div>
+                    <div class="modal-content">
+                        <span ng-click="onXClickSearch(poi.NamePOI)" class="close">&times;</span>
+                        <section>Category: {{categoryJSON[poi.CategoryID]}}
+                            <br>
+                            Rank: {{poi.Rank}}
+                            <br>
+                            Details: {{poi.Details}}
+                            <br>
+                            Number of Views: {{poi.NumOfViews}}
+                            <br>
+                            <span ng-bind-html="reviews"></span>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+<!--        <section>-->
+<!--            <a ng-click="onModalClick(poi)" class="image featured modalPic"><img-->
+<!--                    ng-src={{sortedPOIs[sortedPOIs.indexOf(poi)].img}} alt="" /></a>-->
+<!--            <header>-->
+<!--                <h3>{{sortedPOIs[sortedPOIs.indexOf(poi)].name}}</h3>-->
+<!--            </header>-->
+
+<!--            &lt;!&ndash; The Modal &ndash;&gt;-->
+<!--            <div id="myPOIModal{{poi.name}}" class="modal">-->
+
+<!--                &lt;!&ndash; Modal content &ndash;&gt;-->
+<!--                <section>-->
+<!--                    <div class="row">-->
+<!--                        <div class="modal-content">-->
+<!--                            <span ng-click="onXClick(poi)" class="close">&times;</span>-->
+<!--                            <section style="color: black">Category:-->
+<!--                                {{sortedPOIs[sortedPOIs.indexOf(poi)].category}}-->
+<!--                                <br>-->
+<!--                                Rank: {{sortedPOIs[sortedPOIs.indexOf(poi)].rank}} Out of 100-->
+<!--                                <br>-->
+<!--                                Details: {{sortedPOIs[sortedPOIs.indexOf(poi)].details}}-->
+<!--                                <br>-->
+<!--                                # of Views: {{sortedPOIs[sortedPOIs.indexOf(poi)].views}}-->
+<!--                            </section>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--            </div>-->
+<!--        </section>-->
+
+
+
+
+    </div>
+
+
+</div>

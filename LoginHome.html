@@ -1,25 +1,66 @@
 <div>
     <h1>Most Popular POI:</h1>
     <div ng-repeat="mostPoi in mostPOIs | limitTo:2">
-        <div style="border: solid">
-            <h1>{{mostPoi.NamePOI}} <span>
-                    <button ng-click="onclick(mostPoi, $index,2)">Get more information</button>
-                </span>
-            </h1>
-            <span><img ng-src="{{mostPoi.Picture}}" height="200" width="400"></span>
+        <div id="poi_Div" style="border: solid">
+            <a ng-click="onclickMost($index)"><header>
+                <h3>{{mostPoi.NamePOI}}</h3>
+            </header>
+                <img ng-src={{mostPoi.Picture}} height="200" width="400" alt=""/></a>
+
+
+            <!-- The Modal -->
+            <div id="myModalM{{$index}}" class="modal">
+
+                <!-- Modal content -->
+
+                <div>
+                    <div class="modal-content">
+                        <span ng-click="onXClickM($index)" class="close">&times;</span>
+                        <section>Category: {{categoryJSON[mostPoi.CategoryID]}}
+                            <br>
+                            Rank: {{mostPoi.Rank}}
+                            <br>
+                            Details: {{mostPoi.Details}}
+                            <br>
+                            Number of Views: {{mostPoi.NumOfViews}}
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
 
-<div>
     <h1>Your recent favorites POI:</h1>
-    <div ng-repeat="LastPoi in LastPOIs | limitTo:2">
-        <div style="border: solid">
-            <h1>{{LastPoi.NamePOI}} <span>
-                    <button ng-click="onclick(LastPoi, $index,2)">Get more information</button>
-                </span>
-            </h1>
-            <span><img ng-src="{{LastPoi    .Picture}}" height="200" width="400"></span>
+    <div ng-repeat="lastPoi in lastPOIs | limitTo:2">
+        <div  style="border: solid">
+            <a ng-click="onclickLast($index)"><header>
+                <h3>{{lastPoi.NamePOI}}</h3>
+            </header>
+                <img ng-src={{lastPoi.Picture}} height="200" width="400" alt=""/></a>
+
+
+            <!-- The Modal -->
+            <div id="myModalL{{$index}}" class="modal">
+
+                <!-- Modal content -->
+
+                <div>
+                    <div class="modal-content">
+                        <span ng-click="onXClickL($index)" class="close">&times;</span>
+                        <section>Category: {{categoryJSON[lastPoi.CategoryID]}}
+                            <br>
+                            Rank: {{lastPoi.Rank}}
+                            <br>
+                            Details: {{lastPoi.Details}}
+                            <br>
+                            Number of Views: {{lastPoi.NumOfViews}}
+                        </section>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

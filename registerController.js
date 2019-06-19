@@ -16,7 +16,7 @@ angular.module("myApp")
             // Http connection
             const url = `${localUrl}/Register`;
             const data = jsonToAns;
-            $http.post(url, data).then($scope.successRegister, $scope.errorRegister);
+            $http.post(url,data).then($scope.successRegister, $scope.errorRegister);
         }
         $scope.successRegister = function(response){
             if(response.status == 200){

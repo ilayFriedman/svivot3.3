@@ -28,9 +28,9 @@
 
 <!--navigateBar-->
 <nav class="nav">
-    <a href="# "><span class="spanNav" ng-init="welcomePath = '#!/'" ng-href={{welcomePath}}>Home</span></a>
-    <a href="#!LogIn"><span class="spanNav">Log In</span></a>
-    <a href="#!Register"><span class="spanNav">Register</span></a>
+    <a  ng-init="welcomePath = '#!/';" ng-href={{welcomePath}}><span class="spanNav" >Home</span></a>
+    <a href="#!LogIn" ng-hide="loged"><span class="spanNav">Log In</span></a>
+    <a href="#!Register" ng-hide="loged"><span class="spanNav">Register</span></a>
     <a href=""><span class="spanNav" id="Mabout">About</span></a>
     <a href="#!POIS"><span class="spanNav">View Points</span></a>
     <a href="#!Favorites"><span class="spanNav">My Favorites</span></a>
@@ -49,7 +49,7 @@
 
 
 <!-- The Modal (ABOUT) -->
-<div id="myModal" class="modal">
+<div id="aboutModal" class="modal">
 
     <!-- Modal content -->
     <div class="modal-content">
@@ -78,7 +78,7 @@
 
 <script>
     // Get the modal
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('aboutModal');
 
     // Get the button that opens the modal
     var btn = document.getElementById("Mabout");
@@ -98,7 +98,8 @@
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-        if (event.target == modal) {
+        var modal = document.getElementById('aboutModal');
+        if (event.target === modal) {
             modal.style.display = "none";
         }
     }
