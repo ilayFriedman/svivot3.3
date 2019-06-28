@@ -43,15 +43,15 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
 
 
 
-    $scope.successReviews = function (response) {
-        $scope.currReviews = response.data;
-        $scope.reviews = $sce.trustAsHtml('Reviews: </br>' +
-            '1: ' + $scope.currReviews[0].Details +
+    $rootScope.successReviews = function (response) {
+        $rootScope.currReviews = response.data;
+        $rootScope.reviews = $sce.trustAsHtml('Reviews: </br>' +
+            '1: ' + $rootScope.currReviews[0].Details +
             '</br>' +
-            '2:' + $scope.currReviews[1].Details + '</br>')
+            '2:' + $rootScope.currReviews[1].Details + '</br>')
         console.log($sce.reviews)
     }
-    $scope.errorReviews = function (response) {
+    $rootScope.errorReviews = function (response) {
         alert("shit")
     }
 

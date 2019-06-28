@@ -49,7 +49,7 @@ angular.module("myApp")
                     // $scope.userFavorites.push({NamePOI: $scope.currPOI.NamePOI, modDate: $scope.date});
                     const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                     $http.put(`${localUrl}/private/updateAllFavorites`, $scope.userFavorites, headers).then($scope.successRemoveFavorites, $scope.errorRemoveFavorites);
-                    $window.getNum(2);
+                    $window.numOfFavorites--;
 
                 } else {
                     $scope.errorRemove("");

@@ -5,6 +5,8 @@ angular.module("myApp")
                 $http.get(`${localUrl}/orderByRank`).then(successAllPOI, errorAllPOI);
                 $scope.ranked;
                 $scope.rank = false;
+                $scope.reviewText = "";
+                $scope.numRank = "";
 
                 function successAllPOI(response) {
                     $scope.ranked = angular.copy(response.data)
@@ -45,6 +47,38 @@ angular.module("myApp")
 
                 }
 
+                $scope.addReview = function (poi) {
+                    console.log(poi.NamePOI);
+                    var modal = document.getElementById("addReview" + poi.NamePOI);
+                    modal.style.display = "block";
+                }
+
+                $scope.sendReview = function(poi){
+                    const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
+                    var numRank = $scope.numRank;
+                    var text = $scope.reviewText;
+                    const dataR = {namePoi: poi.NamePOI, myRank: numRank};
+                    $http.put(`${localUrl}/addRank`,dataR).then($scope.successSendRank, $scope.errorSendRank);
+                    const dataText = {namePoi: poi.NamePOI, myReview: text};
+                    $http.put(`${localUrl}/private/addReview`,dataText, headers).then($scope.successSendText, $scope.errorSendText);
+
+                }
+
+
+                $scope.successSendText = function (response) {
+                    alert("text send")
+                }
+                $scope.errorSendText = function (response) {
+                    alert("text error")
+                }
+
+                $scope.successSendRank = function (response) {
+                    alert("rank send")
+                }
+                $scope.errorSendRank = function (response) {
+                    alert("rank error")
+                }
+
                 $scope.successFavorites = function (response) {
                     if (response && response.data) {
                         console.log(response.data)
@@ -56,7 +90,7 @@ angular.module("myApp")
                         $scope.userFavorites.push({NamePOI: $scope.currPOI.NamePOI, modDate: $scope.date});
                         const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                         $http.put(`${localUrl}/private/updateAllFavorites`, $scope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
-                        $window.getNum(1);
+                        $window.numOfFavorites++;
 
                     } else {
                         $scope.errorFavorites("");
