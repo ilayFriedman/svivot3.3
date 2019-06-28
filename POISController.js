@@ -4,6 +4,7 @@ angular.module("myApp")
             function ($scope, $http, $window, $rootScope, $location) {
                 $http.get(`${localUrl}/orderByRank`).then(successAllPOI, errorAllPOI);
                 $scope.ranked;
+                $scope.rank = false;
 
                 function successAllPOI(response) {
                     $scope.ranked = angular.copy(response.data)
@@ -27,6 +28,13 @@ angular.module("myApp")
                 }
                 $scope.errorCat = function (response) {
                     alert("shit category")
+                }
+
+                $scope.byRank = function(){
+                    if($scope.rank == false){
+                        $scope.rank = true;
+                    }
+                    else $scope.rank = false;
                 }
 
                 $scope.addToFavorites = function (poi) {

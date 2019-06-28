@@ -1,32 +1,38 @@
 <div style="padding-top:5%; width:50%; padding-left: 3%;">
 
-    <span>
-<!--        <input type="text" name="searchValue" ng-model="searchValue" class="form-control" required>-->
-        <!--        <input type="checkbox" ng-model="myVar" value="category"> By Category-->
-        <!--        <input type="radio" ng-model="myVar" value="name">By Name-->
-        <input type="checkbox" ng-model="rank" value="rank">By Rank
-        <br>
-        <br>
-    </span>
-
-    <input ng-model="searchName" class="form-control">
-    <br>
-    <br>
-    <select  id="categories" name="categories" ng-model="categories">
-        <option value="">None</option>
-        <option value="1">Architecture</option>
-        <option value="2">Museums</option>
-        <option value="3">Shopping</option>
-        <option value="4">Restaurants</option>
-    </select>
-    <button ng-click="sortByCategory()">Search By Category</button>
+    <table>
+        <th>Filter The Results</th>
+        <tr>
+            <td>
+<!--                <input type="checkbox" ng-model="rank" value="rank">By Rank-->
+                <button ng-click="byRank()">By Rank</button>
+            </td>
+        <tr>
+            <td>
+                <input id="byName" name="byName" ng-model="searchName" placeholder="Search By Name" class="form-control">
+            </td>
+        </tr>
+        <td>
+            <select id="categories" name="categories" ng-model="categories">
+                <option value="">None</option>
+                <option value="1">Architecture</option>
+                <option value="2">Museums</option>
+                <option value="3">Shopping</option>
+                <option value="4">Restaurants</option>
+            </select>
+            <button ng-click="sortByCategory()">Search By Category</button>
+        </td>
+        </tr>
+    </table>
 
     <!--    A-Z SORTED-->
-    <div ng-hide="rank || categories" ng-repeat="poi in allPOIs | filter:searchName">
-        <div style="border: solid">
+    <br>
+    <br>
+    <div ng-hide="rank || categories" ng-repeat="poi in allPOIs | filter:searchName" >
+        <div>
             <a ng-click="onclick(poi, 'myModalSearch')">
                 <header>
-                    <h3>{{poi.NamePOI}}</h3>
+                    <h2>{{poi.NamePOI}}</h2>
                 </header>
                 <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
             <button ng-show="loged" ng-click="addToFavorites(poi)">Add To Favorites</button>
@@ -54,11 +60,11 @@
         </div>
     </div>
     <!--SORT BY RANK-->
-    <div ng-show="rank" ng-hide="categories" ng-repeat="poi in ranked | filter:searchName">
-        <div style="border: solid">
+    <div ng-hide="rank == false" ng-hide="categories" ng-repeat="poi in ranked | filter:searchName" style="border: solid">
+        <div>
             <a ng-click="onclick(poi, 'myModalSearchRank')">
                 <header>
-                    <h3>{{poi.NamePOI}}</h3>
+                    <h2>{{poi.NamePOI}}</h2>
                 </header>
                 <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
             <button ng-show="loged" ng-click="addToFavorites(poi)">Add To Favorites</button>
@@ -86,15 +92,12 @@
 
         </div>
     </div>
-
-
-
-<!--    SORT BY CATEGORY-->
-    <div ng-hide="rank || searchName" ng-repeat="poi in categorySorted | filter:searchName">
-        <div style="border: solid">
+    <!--    SORT BY CATEGORY-->
+    <div ng-hide="rank" ng-repeat="poi in categorySorted | filter:searchName" >
+        <div>
             <a ng-click="onclick(poi, 'myModalSearchCat')">
                 <header>
-                    <h3>{{poi.NamePOI}}</h3>
+                    <h2>{{poi.NamePOI}}</h2>
                 </header>
                 <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
             <button ng-show="loged" ng-click="addToFavorites(poi)">Add To Favorites</button>
