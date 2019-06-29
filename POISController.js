@@ -5,8 +5,8 @@ angular.module("myApp")
                 $http.get(`${localUrl}/orderByRank`).then(successAllPOI, errorAllPOI);
                 $scope.ranked;
                 $scope.rank = false;
-                $scope.reviewText = "";
-                $scope.numRank = "";
+                // $scope.reviewText = "";
+                // $scope.numRank = "";
 
                 function successAllPOI(response) {
                     $scope.ranked = angular.copy(response.data)
@@ -55,7 +55,10 @@ angular.module("myApp")
 
                 $scope.sendReview = function(poi){
                     const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
-                    var numRank = $scope.numRank;
+                    // var numRank = $scope.numRank;
+                    var selector = document.getElementById('numRank'+poi.NamePOI);
+                    var value = selector[selector.selectedIndex].value;
+                    console.log(value)
                     var text = $scope.reviewText;
                     const dataR = {namePoi: poi.NamePOI, myRank: numRank};
                     $http.put(`${localUrl}/addRank`,dataR).then($scope.successSendRank, $scope.errorSendRank);
@@ -86,7 +89,7 @@ angular.module("myApp")
                         for (var i = 0; i<response.data.length; i++){
                             $scope.userFavorites.push({NamePOI: response.data[i].NamePOI, modDate: response.data[i].indexForUser})
                         }
-                        $scope.date = new Date().toLocaleString().replace(', ', ' ').replace(/PM AM\..*$/, '');
+                        $scope.date = new Date();
                         $scope.userFavorites.push({NamePOI: $scope.currPOI.NamePOI, modDate: $scope.date});
                         const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                         $http.put(`${localUrl}/private/updateAllFavorites`, $scope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
@@ -116,9 +119,18 @@ angular.module("myApp")
 
                 $scope.onclick = function (poi, name) {
                     var data2 = {NamePOI: poi.NamePOI};
+
                     $http.post(`${localUrl}/getLastReviews`, data2).then($scope.successReviews, $scope.errorReviews);
+                    var namePoi = {namePoi: poi.NamePOI};
+                    $http.put(`${localUrl}/addOneView`,namePoi).then($scope.successAddView, $scope.errorSAddView);
                     var modal = document.getElementById(name + poi.NamePOI);
                     modal.style.display = "block";
+                }
+
+                $scope.successAddView = function (response) {
+                }
+                $scope.errorSAddView = function (response) {
+                    alert(response.data)
                 }
 
                 $scope.onXClickSearch = function (poi, name) {

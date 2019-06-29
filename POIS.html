@@ -28,7 +28,7 @@
     <!--    A-Z SORTED-->
     <br>
     <br>
-    <div ng-hide="rank || categories" ng-repeat="poi in allPOIs | filter:searchName" >
+    <div ng-hide="rank == true || categories == true" ng-repeat="poi in allPOIs | filter:searchName" >
         <div>
             <a ng-click="onclick(poi, 'myModalSearch')">
                 <header>
@@ -60,6 +60,7 @@
 
         </div>
         <button ng-show="loged"  ng-click="addReview(poi)">Review</button>
+        <form name="addReviewForm" class="search-property-1" ng-submit="sendReview(poi)">
         <div id="addReview{{poi.NamePOI}}" class="modal">
             <div class="modal-content">
                 <span ng-click="onXClickSearch(poi.NamePOI, 'addReview')" class="close">&times;</span>
@@ -68,19 +69,23 @@
                     <h2>Add Review To: {{poi.NamePOI}}</h2>
                 </header>
                 <h2>Rank:</h2>
-                <select id="numRank" name="numRank" ng-model="numRank">
+                <select id=numRank{{poi.NamePOI}}" name="numRank" ng-model="numRank">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
+<!--                <input type="text" name="numRank" ng-model="numRank">-->
                 <h2>Your Review:</h2>
                 <textarea id="reviewText" name="reviewText" ng-model="reviewText" rows="4" cols="50"></textarea>
-
-                <button ng-click="sendReview(poi)">Send Review</button>
+                <input type="submit" id="submit" value="Send Review" class="form-control btn btn-primary">
             </div>
-
+            </div>
+        </form>
+<!--                <button ng-click="sendReview(poi)">Send Review</button>-->
+            </div>
+<
         </div>
     </div>
     <!--SORT BY RANK-->
@@ -117,7 +122,7 @@
         </div>
     </div>
     <!--    SORT BY CATEGORY-->
-    <div ng-hide="rank" ng-repeat="poi in categorySorted | filter:searchName" >
+    <div ng-hide="rank == true" ng-repeat="poi in categorySorted | filter:searchName" >
         <div>
             <a ng-click="onclick(poi, 'myModalSearchCat')">
                 <header>

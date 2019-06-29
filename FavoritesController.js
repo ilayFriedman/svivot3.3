@@ -78,9 +78,18 @@ angular.module("myApp")
 
             $scope.onclick = function (poi, name) {
                 var data2 = {NamePOI: poi.NamePOI};
+                var namePoi = {namePoi: poi.NamePOI};
+                $http.put(`${localUrl}/addOneView`,namePoi).then($scope.successAddView, $scope.errorSAddView);
                 $http.post(`${localUrl}/getLastReviews`, data2).then($scope.successReviews, $scope.errorReviews);
                 var modal = document.getElementById(name + poi.NamePOI);
                 modal.style.display = "block";
+            }
+
+            $scope.successAddView = function (response) {
+
+            }
+            $scope.errorSAddView = function (response) {
+                alert(response.data)
             }
 
             $scope.onXClickSearch = function (poi, name) {

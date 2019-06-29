@@ -57,12 +57,22 @@ angular.module("myApp").controller("LoginHomeController", ['$scope', '$http', '$
     }
 
     //modal:
-    $scope.onclickMost = function (index) {
+    $scope.onclickMost = function (index, poi) {
+        var namePoi = {namePoi: poi.NamePOI};
+        $http.put(`${localUrl}/addOneView`,namePoi).then($scope.successAddView, $scope.errorSAddView);
         var modal = document.getElementById("myModalM" + index);
         modal.style.display = "block";
 
     }
-    $scope.onclickLast = function (index) {
+
+    $scope.successAddView = function (response) {
+    }
+    $scope.errorSAddView = function (response) {
+        alert(response.data)
+    }
+    $scope.onclickLast = function (index, poi) {
+        var namePoi = {namePoi: poi.NamePOI};
+        $http.put(`${localUrl}/addOneView`,namePoi).then($scope.successAddView, $scope.errorSAddView);
         var modal = document.getElementById("myModalL" + index);
         modal.style.display = "block";
 

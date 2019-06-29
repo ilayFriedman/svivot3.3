@@ -56,10 +56,19 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
     }
 
     $scope.onclick = function (index) {
+        var namePoi = {namePoi: $scope.POIs[index].NamePOI};
+        $http.put(`${localUrl}/addOneView`,namePoi).then($scope.successAddView, $scope.errorSAddView);
         var data2 = {NamePOI: $scope.POIs[index].NamePOI};
         $http.post(`${localUrl}/getLastReviews`,data2).then($scope.successReviews, $scope.errorReviews);
         var modal = document.getElementById("myModal" + index);
         modal.style.display = "block";
+    }
+
+    $scope.successAddView = function (response) {
+
+    }
+    $scope.errorSAddView = function (response) {
+        alert(response.data)
     }
 
     $scope.onXClick = function (index) {
