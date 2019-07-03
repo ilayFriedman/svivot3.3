@@ -1,15 +1,6 @@
 body{
+    background: url("https://wallpapercave.com/wp/wp2445772.jpg") no-repeat center center fixed;
     height: 100%;
-}
-
-.bgImg{
-    background-image: url("https://imgpile.com/images/d1006270bb49890f118800e9cbc1989f.jpg");
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
 
 .navBar{
@@ -20,6 +11,9 @@ body{
     overflow: hidden;
     background-color: #333;
     color: white;
+    position: fixed;
+    width: 99%;
+    top: 0px;
 }
 
 .spanItem {
@@ -58,13 +52,13 @@ body{
 }
 .loginTitle{
     font-family: 'Calibri', sans-seif;
-    background-color: #666666;
+    background-color: #222222;
     -webkit-background-clip: text;
     font-size: 300%;
     font-weight: bold;
 
     color: transparent;
-    text-shadow: rgba(255,255,255,0.5) 0px 3px 3px
+    text-shadow: rgba(255, 255, 255, 0.84) 0px 3px 3px
 }
 .form-style-5{
     max-width: 500px;
