@@ -1,14 +1,15 @@
 <div style="padding-top:5%; width:50%; padding-left: 3%;">
     <h1>Your Favorites POIs:</h1>
-
-    <div ng-repeat="poi in favorites">
+    <button ng-click="updateAllFavorites()">update favorites</button>
+    <div ng-repeat="poi in myFavorites">
         <div style="border: solid">
             <a ng-click="onclick(poi, 'myModalSearch')">
                 <header>
                     <h3>{{poi.NamePOI}}</h3>
                 </header>
                 <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
-            <button ng-show="loged" ng-click="removeToFavorites(poi)">Remove To Favorites</button>
+            <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
+                    ng-checked={{isInFavorites(poi)}}><spam ng-show="loged">In My Favorites</spam>
             <!-- The Modal -->
             <div id="myModalSearch{{poi.NamePOI}}" class="modal">
                 <!-- Modal content -->

@@ -49,15 +49,11 @@ angular.module("myApp")
                 }
                 $scope.addToFavorites = function (poi) {
                     console.log(poi.NamePOI)
-                    $scope.currPOI = poi;
                     // $scope.favorites = JSON.parse($window.sessionStorage.allUserFavorites);
                     if ($scope.isInFavorites(poi)) {
-                        // var index = $rootScope.userFavorites.indexOf(poi.NamePOI);
-                        // $rootScope.userFavorites.splice(index, 1)
-                        //delete $rootScope.userFavorites.get(poi.NamePOI)
                         $rootScope.userFavorites = $rootScope.userFavorites.filter((favorite) => favorite.NamePOI !== poi.NamePOI);
                     } else {
-                        $rootScope.userFavorites.push({NamePOI: $scope.currPOI.NamePOI, modDate: new Date()});
+                        $rootScope.userFavorites.push({NamePOI: poi.NamePOI, modDate: new Date()});
                     }
                     // var checkBoxPOI = document.getElementById("clicked" + poi.NamePOI);
                     // for (var i = 0; i < $scope.favorites.length; i++) {
@@ -78,8 +74,21 @@ angular.module("myApp")
                 $scope.updateAllFavorites = function () {
                     const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                     $http.put(`${localUrl}/private/updateAllFavorites`, $rootScope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
-
+                    $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then($scope.successFavorites,  $scope.errorFavorites);
                 }
+
+                $scope.successFavorites = function (response) {
+                    $rootScope.favorites = response.data;
+                    $rootScope.userFavorites = [];
+                    for (var i = 0; i < $rootScope.favorites.length; i++) {
+                        $rootScope.userFavorites.push({
+                            NamePOI: $rootScope.favorites[i].NamePOI,
+                            modDate: $rootScope.favorites[i].indexForUser
+                        })
+                    }
+                    $window.numOfFavorites = response.data.length;
+                }
+                $scope.errorFavorites = function (response) {}
 
 
                 $scope.addReview = function (poi) {

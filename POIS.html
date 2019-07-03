@@ -37,8 +37,8 @@
                     <h2>{{poi.NamePOI}}</h2>
                 </header>
                 <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
-            <input type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
-                   ng-checked={{isInFavorites(poi)}} ></input>
+            <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
+                   ng-checked={{isInFavorites(poi)}}><spam ng-show="loged">In My Favorites</spam>
 <!--            <button ng-show="loged" ng-click="addReview(poi)">Add Review</button>-->
             <!-- The Modal -->
             <div id="myModalSearch{{poi.NamePOI}}" class="modal">
