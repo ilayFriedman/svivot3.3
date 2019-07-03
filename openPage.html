@@ -1,12 +1,19 @@
-<div style="padding-top:5%; width:50%; padding-left: 3%;">
+<div style="padding-top:5%; padding-left: 15%;">
+    <p class="h1welcome">Welcome</p>
+    <p class="h1welcome" style="font: 200 1em/1 'Raleway', sans-serif;">here's some random locations from Bacelona</p>
     <!--    RANDOM 3 POI:-->
-    <div ng-repeat="poi in POIs">
-        <div id="poi_Div" style="border: solid">
+    <div id="container">
+        <div id="inner">
+
+
+    <div ng-repeat="poi in POIs"  class="child responsive">
+        <div id="poi_Div"  class="gallery" style="background-color: white; width: 95%; height: 95%">
             <a ng-click="onclick($index)">
-                <header>
+                <img ng-src={{poi.Picture}} height="200" width="400" alt=""/>
+                <header class="desc">
                     <h3>{{poi.NamePOI}}</h3>
                 </header>
-                <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
+                </a>
 
 
             <!-- The Modal -->
@@ -35,6 +42,8 @@
             </div>
 
         </div>
+    </div>
+
     </div>
 
 </div>
