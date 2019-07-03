@@ -11,6 +11,7 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
 
     $rootScope.logOut = function () {
         $rootScope.loged =  false;
+        $rootScope.welcomePath = '#!'
     }
 
     $scope.helloName = function () {
