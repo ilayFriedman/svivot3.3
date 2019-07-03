@@ -35,14 +35,11 @@ angular.module("myApp")
                 // $window.location.href = "#!/LogInHome"
                 $location.url('/LogInHome');
             } else {
-                $scope.errorLogin("");
+                $scope.errorLogin("Incorrect Username or Password");
             }
         }
         $scope.errorLogin = function (errorResponse) {
-            if (errorResponse && (errorResponse.status == 401)) {
-                $scope.errors = [{key: 'errorInLogin', value: errorResponse.data}];
-            } else
-                $scope.errors = [{key: 'errorInLogin', value: 'Oops we have a problem. Please try again later.'}];
+            alert("Incorrect Username or Password")
         }
 
         // Restore answers from server:
