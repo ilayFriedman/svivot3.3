@@ -9,6 +9,10 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
         }
     };
 
+    $rootScope.logOut = function () {
+        $rootScope.loged =  false;
+    }
+
     $scope.helloName = function () {
         if ($scope.connectionStatus()) {   // connected!!
 
