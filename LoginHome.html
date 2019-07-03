@@ -1,11 +1,16 @@
-<div>
-    <h1>Most Popular POI:</h1>
-    <div ng-repeat="mostPoi in mostPOIs | limitTo:2">
-        <div id="poi_Div" style="border: solid">
-            <a ng-click="onclickMost($index, mostPoi)"><header>
+<div style="margin-top: 5%; margin-left: 15%;height: 800px;">
+    <h1 class="loginTitle">Most Popular POI:</h1>
+
+    <div class="container">
+        <div class="inner">
+    <div ng-repeat="mostPoi in mostPOIs | limitTo:2" class="responsive child">
+        <div id="poi_Div"  class="gallery" style="background-color: white; width: 95%; height: 95%">
+            <a ng-click="onclickMost($index, mostPoi)">
+                <img ng-src={{mostPoi.Picture}} height="200" width="400" alt=""/>
+            <header>
                 <h3>{{mostPoi.NamePOI}}</h3>
             </header>
-                <img ng-src={{mostPoi.Picture}} height="200" width="400" alt=""/></a>
+                </a>
 
 
             <!-- The Modal -->
@@ -33,13 +38,17 @@
         </div>
     </div>
 
-    <h1>Your recent favorites POI:</h1>
-    <div ng-repeat="lastPoi in lastPOIs | limitTo:2">
-        <div  style="border: solid">
-            <a ng-click="onclickLast($index, lastPoi)"><header>
+</div>
+        <div class="">
+    <h1 class="loginTitle">Your recent favorites POI:</h1>
+    <div ng-repeat="lastPoi in lastPOIs | limitTo:2"  class="responsive">
+        <div  class="gallery" style="background-color: white; width: 95%; height: 95%">
+            <a ng-click="onclickLast($index, lastPoi)">
+                <img ng-src={{lastPoi.Picture}} height="200" width="400" alt=""/>
+                <header>
                 <h3>{{lastPoi.NamePOI}}</h3>
             </header>
-                <img ng-src={{lastPoi.Picture}} height="200" width="400" alt=""/></a>
+                </a>
 
 
             <!-- The Modal -->
@@ -66,3 +75,5 @@
         </div>
     </div>
 </div>
+    </div></div>
+    </div>

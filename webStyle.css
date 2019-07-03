@@ -166,12 +166,22 @@ body{
 
 /*OPEN WINDOW CSS */
 
-#container {
+.container {
     overflow: hidden;
 
 }
 
-#inner {
+.inner {
+    overflow: hidden;
+
+}
+
+.container1 {
+    overflow: hidden;
+
+}
+
+.inner1 {
     overflow: hidden;
 
 }
@@ -209,7 +219,8 @@ div.desc {
 .responsive {
     padding: 0 6px;
     float: left;
-    width: 24.99999%;
+    width: 400px;
+    height: 300px;
 }
 
 
