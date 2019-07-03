@@ -5,7 +5,7 @@ angular.module("myApp")
                 $http.get(`${localUrl}/orderByRank`).then(successAllPOI, errorAllPOI);
                 $scope.ranked;
                 $scope.rank = false;
-                $scope.userFavorites = [];
+                // $scope.userFavorites = [];
                 // $scope.reviewText = "";
                 // $scope.numRank = "";
 
@@ -44,33 +44,40 @@ angular.module("myApp")
                 }
 
                 $scope.isInFavorites = function (poi) {
-                    $scope.favorites = JSON.parse($window.sessionStorage.allUserFavorites);
-                    return $scope.favorites.find((favorite) => favorite.NamePOI === poi.NamePOI) !== undefined
+                    // $rootScope.favorites = JSON.parse($window.sessionStorage.allUserFavorites);
+                    return $rootScope.userFavorites.find((favorite) => favorite.NamePOI === poi.NamePOI) !== undefined
                 }
                 $scope.addToFavorites = function (poi) {
                     console.log(poi.NamePOI)
                     $scope.currPOI = poi;
-                    $scope.favorites = JSON.parse($window.sessionStorage.allUserFavorites);
-                    if($scope.isInFavorites(poi))
-                    var checkBoxPOI = document.getElementById("clicked" + poi.NamePOI);
-                    for (var i = 0; i < $scope.favorites.length; i++) {
-                        if (checkBoxPOI == true && poi.NamePOI != $scope.favorites[i].NamePOI)
-                            $scope.userFavorites.push({
-                                NamePOI: $scope.favorites[i].NamePOI,
-                                modDate: $scope.favorites[i].indexForUser
-                            })
+                    // $scope.favorites = JSON.parse($window.sessionStorage.allUserFavorites);
+                    if ($scope.isInFavorites(poi)) {
+                        // var index = $rootScope.userFavorites.indexOf(poi.NamePOI);
+                        // $rootScope.userFavorites.splice(index, 1)
+                        //delete $rootScope.userFavorites.get(poi.NamePOI)
+                        $rootScope.userFavorites = $rootScope.userFavorites.filter((favorite) => favorite.NamePOI !== poi.NamePOI);
+                    } else {
+                        $rootScope.userFavorites.push({NamePOI: $scope.currPOI.NamePOI, modDate: new Date()});
                     }
+                    // var checkBoxPOI = document.getElementById("clicked" + poi.NamePOI);
+                    // for (var i = 0; i < $scope.favorites.length; i++) {
+                    //     if (checkBoxPOI == true && poi.NamePOI != $scope.favorites[i].NamePOI)
+                    //         $scope.userFavorites.push({
+                    //             NamePOI: $scope.favorites[i].NamePOI,
+                    //             modDate: $scope.favorites[i].indexForUser
+                    //         })
+                    // }
                     // $scope.date = new Date();
-                    if (checkBoxPOI == true){
-                        $scope.userFavorites.push({NamePOI: $scope.currPOI.NamePOI, modDate: new Date()});
-                    }
+                    // if (checkBoxPOI == true){
+                    //
+                    // }
                     // const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                     // $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then($scope.successFavorites, $scope.errorFavorites);
 
                 }
                 $scope.updateAllFavorites = function () {
                     const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
-                    $http.put(`${localUrl}/private/updateAllFavorites`, $scope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
+                    $http.put(`${localUrl}/private/updateAllFavorites`, $rootScope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
 
                 }
 

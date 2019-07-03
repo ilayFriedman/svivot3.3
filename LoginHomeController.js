@@ -9,17 +9,26 @@ angular.module("myApp").controller("LoginHomeController", ['$scope', '$http', '$
     }
 
     function successFavorites(response) {
-        $window.sessionStorage.setItem('allUserFavorites', JSON.stringify(response.data));
+        $rootScope.favorites = response.data;
+        $rootScope.userFavorites = [];
+        for (var i = 0; i < $rootScope.favorites.length; i++) {
+            $rootScope.userFavorites.push({
+                NamePOI: $rootScope.favorites[i].NamePOI,
+                modDate: $rootScope.favorites[i].indexForUser
+            })
+        }
         $window.numOfFavorites = response.data.length;
     }
+
     $window.getNum = function (isUp) {
-        if(isUP === 1){
+        if (isUP === 1) {
             $window.numOfFavorites++;
-        }else if(isUp === 2){
+        } else if (isUp === 2) {
             $window.numOfFavorites--;
         }
-        return  $window.numOfFavorites;
+        return $window.numOfFavorites;
     }
+
     function errorFavorites(response) {
         errorMost("");
     }
@@ -60,7 +69,7 @@ angular.module("myApp").controller("LoginHomeController", ['$scope', '$http', '$
     //modal:
     $scope.onclickMost = function (index, poi) {
         var namePoi = {namePoi: poi.NamePOI};
-        $http.put(`${localUrl}/addOneView`,namePoi).then($scope.successAddView, $scope.errorSAddView);
+        $http.put(`${localUrl}/addOneView`, namePoi).then($scope.successAddView, $scope.errorSAddView);
         var modal = document.getElementById("myModalM" + index);
         modal.style.display = "block";
 
@@ -73,7 +82,7 @@ angular.module("myApp").controller("LoginHomeController", ['$scope', '$http', '$
     }
     $scope.onclickLast = function (index, poi) {
         var namePoi = {namePoi: poi.NamePOI};
-        $http.put(`${localUrl}/addOneView`,namePoi).then($scope.successAddView, $scope.errorSAddView);
+        $http.put(`${localUrl}/addOneView`, namePoi).then($scope.successAddView, $scope.errorSAddView);
         var modal = document.getElementById("myModalL" + index);
         modal.style.display = "block";
 
