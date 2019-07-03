@@ -51,14 +51,14 @@ body{
     height: 100%;
 }
 .loginTitle{
-    font-family: 'Calibri', sans-seif;
-    background-color: #222222;
+    font-family: 'Calibri', ssans-seif;
+    background-color: #fafafa;
     -webkit-background-clip: text;
     font-size: 300%;
     font-weight: bold;
 
     color: transparent;
-    text-shadow: rgba(255, 255, 255, 0.84) 0px 3px 3px
+    text-shadow: rgba(238, 238, 238, 0.84) 0px 3px 3px
 }
 .form-style-5{
     max-width: 500px;
