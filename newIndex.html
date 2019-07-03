@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Barcelona</title>
-
     <link rel="stylesheet" type="text/css" href="indexCss.css">
+    <link rel="stylesheet" type="text/css" href="webStyle.css">
 
 </head>
 <body ng-app="myApp">
-
+<div cakl></div>
 <!-- load angular -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.js"></script>
 <script src="https://code.angularjs.org/1.7.8/angular-route.js"></script>
@@ -26,16 +26,15 @@
 
 
 <!--navigateBar-->
-<nav class="nav">
-    <a ng-init="welcomePath = '#!/';" ng-href={{welcomePath}}><span class="spanNav">Home</span></a>
-    <a href="#!LogIn" ng-hide="loged"><span class="spanNav">Log In</span></a>
-    <a href="#!Register" ng-hide="loged"><span class="spanNav">Register</span></a>
-    <a href=""><span class="spanNav" id="Mabout">About</span></a>
-    <a href="#!POIS"><span class="spanNav">View Points</span></a>
-    <a href="#!Favorites" ng-show="loged"><span class="spanNav">My Favorites
-        <span ng-controller="LoginHomeController"></span>
-    </span></a>
-    <span>Hello <span ng-controller="indexController">{{helloName()}}</span></span>
+<nav class="navBar">
+    <span class="spanItem"><a ng-init="welcomePath = '#!/';" ng-href={{welcomePath}}>Home</a></span>
+    <span class="spanItem"><a href="#!LogIn" ng-hide="loged">Log In</a></span>
+    <span class="spanItem"><a href="#!Register" ng-hide="loged">Register</a></span>
+    <span class="spanItem" id="Mabout"><a href="">About</a></span>
+    <span class="spanItem"><a href="#!POIS">View Points</a></span>
+    <span class="spanItem"><a href="#!Favorites" ng-show="loged">My Favorites<span ng-controller="LoginHomeController"></span>
+    </a></span>
+    <span class="spanItem hello">Hello <span ng-controller="indexController">{{helloName()}}</span></span>
 
 </nav>
 <div class="explore" ng-view>
