@@ -1,6 +1,5 @@
 <div style="padding-top:3%; padding-left: 0%;">
     <h1 class="loginTitle">All Points Of Interests:</h1>
-
     <table>
         <tr>
             <td>
@@ -31,7 +30,6 @@
     <br>
     <div class="container">
         <div class="inner">
-
 
     <div ng-hide="rank == true || byCat == true" ng-repeat="poi in allPOIs | filter:searchName" class="responsive child">
         <div  class="gallery" style="background-color: white; width: 95%; height: 85%">
@@ -103,7 +101,10 @@
     <!--SORT BY RANK-->
     <div ng-hide="rank == false || byCat == true" ng-hide="byCat == true" ng-repeat="poi in ranked | filter:searchName" class="responsive child">
         <div  class="gallery" style="background-color: white; width: 95%; height: 95%">
-            <button ng-show="loged" ng-click="addToFavorites(poi)">Add To Favorites</button>
+            <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
+                    ng-checked={{isInFavorites(poi)}}><span ng-show="loged">In My Favorites</span>
+            <button ng-show="loged"  ng-click="addReview(poi)">Review</button>
+
             <a ng-click="onclick(poi, 'myModalSearchRank')">
                 <img ng-src={{poi.Picture}} height="200" width="400" alt=""/>
                 <header>
@@ -144,7 +145,10 @@
     <!--    SORT BY CATEGORY-->
     <div ng-show ="byCat == true"  ng-repeat="poi in categorySorted | filter:searchName" class="responsive child">
         <div class="gallery" style="background-color: white; width: 95%; height: 95%">
-            <button ng-show="loged" ng-click="addToFavorites(poi)">Add To Favorites</button>
+            <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
+                    ng-checked={{isInFavorites(poi)}}><span ng-show="loged">In My Favorites</span>
+            <button ng-show="loged"  ng-click="addReview(poi)">Review</button>
+
             <a ng-click="onclick(poi, 'myModalSearchCat')"><img ng-src={{poi.Picture}} height="200" width="400" alt=""/>
                 <header>
 
