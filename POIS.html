@@ -1,7 +1,7 @@
-<div style="padding-top:5%; width:50%; padding-left: 3%;">
+<div style="padding-top:3%; padding-left: 0%;">
+    <h1 class="loginTitle">All Points Of Interests:</h1>
 
     <table>
-        <th>Filter The Results</th>
         <tr>
             <td>
 <!--                <input type="checkbox" ng-model="rank" value="rank">By Rank-->
@@ -24,21 +24,26 @@
         </td>
         </tr>
     </table>
-
-    <button ng-click="updateAllFavorites()">update favorites</button>
+    <button  ng-click="updateAllFavorites()">update favorites</button>
 
     <!--   CATEGORY SORTED-->
     <br>
     <br>
-    <div ng-hide="rank == true || byCat == true" ng-repeat="poi in allPOIs | filter:searchName" >
-        <div>
+    <div class="container">
+        <div class="inner">
+
+
+    <div ng-hide="rank == true || byCat == true" ng-repeat="poi in allPOIs | filter:searchName" class="responsive child">
+        <div  class="gallery" style="background-color: white; width: 95%; height: 85%">
+            <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
+                    ng-checked={{isInFavorites(poi)}}><span ng-show="loged">In My Favorites</span>
+            <button ng-show="loged"  ng-click="addReview(poi)">Review</button>
             <a ng-click="onclick(poi, 'myModalSearch')">
+                <img ng-src={{poi.Picture}} alt=""/>
                 <header>
                     <h2>{{poi.NamePOI}}</h2>
                 </header>
-                <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
-            <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
-                   ng-checked={{isInFavorites(poi)}}><spam ng-show="loged">In My Favorites</spam>
+            </a>
 <!--            <button ng-show="loged" ng-click="addReview(poi)">Add Review</button>-->
             <!-- The Modal -->
             <div id="myModalSearch{{poi.NamePOI}}" class="modal">
@@ -62,7 +67,7 @@
             </div>
 
         </div>
-        <button ng-show="loged"  ng-click="addReview(poi)">Review</button>
+
         <form name="addReviewForm" class="search-property-1" ng-submit="sendReview(poi)">
         <div id="addReview{{poi.NamePOI}}" class="modal">
             <div class="modal-content">
@@ -91,15 +96,21 @@
 
         </div>
     </div>
+</div>
+<div class="container">
+    <div class="inner">
+
     <!--SORT BY RANK-->
-    <div ng-hide="rank == false || byCat == true" ng-hide="byCat == true" ng-repeat="poi in ranked | filter:searchName" style="border: solid">
-        <div>
-            <a ng-click="onclick(poi, 'myModalSearchRank')">
-                <header>
-                    <h2>{{poi.NamePOI}}</h2>
-                </header>
-                <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
+    <div ng-hide="rank == false || byCat == true" ng-hide="byCat == true" ng-repeat="poi in ranked | filter:searchName" class="responsive child">
+        <div  class="gallery" style="background-color: white; width: 95%; height: 95%">
             <button ng-show="loged" ng-click="addToFavorites(poi)">Add To Favorites</button>
+            <a ng-click="onclick(poi, 'myModalSearchRank')">
+                <img ng-src={{poi.Picture}} height="200" width="400" alt=""/>
+                <header>
+                    <selection>{{poi.NamePOI}} <br>Rank: {{poi.Rank}}</selection>
+                </header>
+                </a>
+
             <!-- The Modal -->
             <div id="myModalSearchRank{{poi.NamePOI}}" class="modal">
                 <!-- Modal content -->
@@ -124,15 +135,23 @@
 
         </div>
     </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="inner">
+
     <!--    SORT BY CATEGORY-->
-    <div ng-show ="byCat == true"  ng-repeat="poi in categorySorted | filter:searchName" >
-        <div>
-            <a ng-click="onclick(poi, 'myModalSearchCat')">
-                <header>
-                    <h2>{{poi.NamePOI}}</h2>
-                </header>
-                <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
+    <div ng-show ="byCat == true"  ng-repeat="poi in categorySorted | filter:searchName" class="responsive child">
+        <div class="gallery" style="background-color: white; width: 95%; height: 95%">
             <button ng-show="loged" ng-click="addToFavorites(poi)">Add To Favorites</button>
+            <a ng-click="onclick(poi, 'myModalSearchCat')"><img ng-src={{poi.Picture}} height="200" width="400" alt=""/>
+                <header>
+
+                    <h3>{{poi.NamePOI}} </h3>
+                </header>
+                </a>
+
             <!-- The Modal -->
             <div id="myModalSearchCat{{poi.NamePOI}}" class="modal">
                 <!-- Modal content -->
@@ -157,7 +176,8 @@
 
         </div>
     </div>
-
+    </div>
+</div>
 
 
 </div>
