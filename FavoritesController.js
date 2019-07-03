@@ -1,3 +1,4 @@
+
 angular.module("myApp")
     .controller("FavoritesController", ['$scope', '$http', '$window', '$rootScope', '$sce',
         function ($scope, $http, $window, $rootScope, $sce) {
@@ -74,7 +75,7 @@ angular.module("myApp")
             // $scope.errorRemoveFavorites = function (Response) {
             //     alert("not added")
             // }
-            $scope.myFavorites = $rootScope.favorites;
+            $scope.fav = $rootScope.favorites
             $scope.isInFavorites = function (poi) {
                 // $rootScope.favorites = JSON.parse($window.sessionStorage.allUserFavorites);
                 return $rootScope.userFavorites.find((favorite) => favorite.NamePOI === poi.NamePOI) !== undefined
@@ -103,6 +104,8 @@ angular.module("myApp")
                 // $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then($scope.successFavorites, $scope.errorFavorites);
 
             }
+
+
             $scope.updateAllFavorites = function () {
                 const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                 $http.put(`${localUrl}/private/updateAllFavorites`, $rootScope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
@@ -120,6 +123,7 @@ angular.module("myApp")
                 }
                 $window.numOfFavorites = response.data.length;
             }
+
             $scope.errorFavorites = function (response) {}
 
             $scope.successAddFavorites = function (Response) {
@@ -150,7 +154,7 @@ angular.module("myApp")
             }
 
             window.onclick = function (event) {
-                for (var i = 0; i < $scope.favorites.length; i++) {
+                for (var i = 0; i < $scope.fav.length; i++) {
                     var modal = document.getElementById("myModalSearch" + $scope.favorites[i].NamePOI);
                     if (event.target === modal) {
                         try {
@@ -163,7 +167,7 @@ angular.module("myApp")
             }
             window.addEventListener("keydown", function (event) {
                 //if ($scope.POIs) {
-                for (var i = 0; i < $scope.favorites.length; i++) {
+                for (var i = 0; i < $scope.fav.length; i++) {
                     var modal = document.getElementById("myModalSearch" + $scope.favorites[i].NamePOI);
                     if (event.code == "Escape") {
                         try {

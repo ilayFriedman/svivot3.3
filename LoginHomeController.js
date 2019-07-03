@@ -20,6 +20,8 @@ angular.module("myApp").controller("LoginHomeController", ['$scope', '$http', '$
         $window.numOfFavorites = response.data.length;
     }
 
+
+
     $window.getNum = function (isUp) {
         if (isUP === 1) {
             $window.numOfFavorites++;

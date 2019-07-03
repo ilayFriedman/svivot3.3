@@ -1,7 +1,8 @@
 <div style="padding-top:5%; width:50%; padding-left: 3%;">
     <h1>Your Favorites POIs:</h1>
-    <button ng-click="updateAllFavorites()">update favorites</button>
-    <div ng-repeat="poi in myFavorites">
+    <button ng-click="updateAllFavorites()">Update favorites</button>
+
+    <div  ng-repeat="poi in fav">
         <div style="border: solid">
             <a ng-click="onclick(poi, 'myModalSearch')">
                 <header>

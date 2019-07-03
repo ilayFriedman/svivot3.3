@@ -74,10 +74,10 @@ angular.module("myApp")
                 $scope.updateAllFavorites = function () {
                     const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                     $http.put(`${localUrl}/private/updateAllFavorites`, $rootScope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
-                    $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then($scope.successFavorites,  $scope.errorFavorites);
+                    $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then($rootScope.successFavorites,  $scope.errorFavorites);
                 }
 
-                $scope.successFavorites = function (response) {
+                $rootScope.successFavorites = function (response) {
                     $rootScope.favorites = response.data;
                     $rootScope.userFavorites = [];
                     for (var i = 0; i < $rootScope.favorites.length; i++) {
@@ -126,36 +126,6 @@ angular.module("myApp")
                     alert("rank error")
                 }
 
-                // $scope.successFavorites = function (response) {
-                //     // if (response && response.data) {
-                //     //     console.log(response.data)
-                //
-                //     for (var i = 0; i < response.data.length; i++) {
-                //         $scope.userFavorites.push({
-                //             NamePOI: response.data[i].NamePOI,
-                //             modDate: response.data[i].indexForUser
-                //         })
-                //     }
-                //     $scope.date = new Date();
-                //     $scope.userFavorites.push({NamePOI: $scope.currPOI.NamePOI, modDate: $scope.date});
-                //     const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
-                //     $http.put(`${localUrl}/private/updateAllFavorites`, $scope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
-                //     $window.numOfFavorites++;
-                //
-                //     // } else {
-                //     //     $scope.errorFavorites("");
-                //     // }
-                // }
-                //
-                // $scope.errorFavorites = function (errorResponse) {
-                //     if (errorResponse && (errorResponse.status == 401)) {
-                //         $scope.errors = [{key: 'errorInFav', value: errorResponse.data}];
-                //     } else
-                //         $scope.errors = [{
-                //             key: 'errorInFav',
-                //             value: 'Oops we have a problem. Please try again later.'
-                //         }];
-                // }
 
                 $scope.successAddFavorites = function (Response) {
                     alert("The POI has added to your favorites")
