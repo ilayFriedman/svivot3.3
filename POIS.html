@@ -25,7 +25,7 @@
     </table>
     <button  ng-click="updateAllFavorites()">update favorites</button>
 
-    <!--   CATEGORY SORTED-->
+    <!--   FIRST CATEGORY SORTED-->
     <br>
     <br>
     <div class="container">
@@ -35,7 +35,7 @@
         <div  class="gallery" style="background-color: white; width: 95%; height: 85%">
             <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
                     ng-checked={{isInFavorites(poi)}}><span ng-show="loged">In My Favorites</span>
-            <button ng-show="loged"  ng-click="addReview(poi)">Review</button>
+            <button ng-show="loged"  ng-click="addReview(poi, 1)">Review</button>
             <a ng-click="onclick(poi, 'myModalSearch')">
                 <img ng-src={{poi.Picture}} alt=""/>
                 <header>
@@ -67,15 +67,15 @@
         </div>
 
         <form name="addReviewForm" class="search-property-1" ng-submit="sendReview(poi)">
-        <div id="addReview{{poi.NamePOI}}" class="modal">
+        <div id="addReview1{{poi.NamePOI}}" class="modal">
             <div class="modal-content">
-                <span ng-click="onXClickSearch(poi.NamePOI, 'addReview')" class="close">&times;</span>
+                <span ng-click="onXClickSearch(poi.NamePOI, 'addReview1')" class="close">&times;</span>
 
                 <header>
                     <h2>Add Review To: {{poi.NamePOI}}</h2>
                 </header>
                 <h2>Rank:</h2>
-                <select id=numRank{{poi.NamePOI}}" name="numRank" ng-model="numRank">
+                <select id=numRank1{{poi.NamePOI}}" name="numRank" ng-model="numRank">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -84,8 +84,8 @@
                 </select>
 <!--                <input type="text" name="numRank" ng-model="numRank">-->
                 <h2>Your Review:</h2>
-                <textarea id="reviewText" name="reviewText" ng-model="reviewText" rows="4" cols="50"></textarea>
-                <input type="submit" id="submit" value="Send Review" class="form-control btn btn-primary">
+                <textarea id="reviewText1" name="reviewText" ng-model="reviewText" rows="4" cols="50"></textarea>
+                <input type="submit" id="submit1" value="Send Review" class="form-control btn btn-primary">
             </div>
             </div>
         </form>
@@ -103,7 +103,7 @@
         <div  class="gallery" style="background-color: white; width: 95%; height: 95%">
             <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
                     ng-checked={{isInFavorites(poi)}}><span ng-show="loged">In My Favorites</span>
-            <button ng-show="loged"  ng-click="addReview(poi)">Review</button>
+            <button ng-show="loged" ng-click="addReview(poi, 2)">Add Review</button>
 
             <a ng-click="onclick(poi, 'myModalSearchRank')">
                 <img ng-src={{poi.Picture}} height="200" width="400" alt=""/>
@@ -133,7 +133,29 @@
                     </div>
                 </div>
             </div>
+            <form name="addReviewForm" class="search-property-1" ng-submit="sendReview(poi)">
+                <div id="addReview2{{poi.NamePOI}}" class="modal">
+                    <div class="modal-content">
+                        <span ng-click="onXClickSearch(poi.NamePOI, 'addReview2')" class="close">&times;</span>
 
+                        <header>
+                            <h2>Add Review To: {{poi.NamePOI}}</h2>
+                        </header>
+                        <h2>Rank:</h2>
+                        <select id=numRank2{{poi.NamePOI}}" name="numRank" ng-model="numRank">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <!--                <input type="text" name="numRank" ng-model="numRank">-->
+                        <h2>Your Review:</h2>
+                        <textarea id="reviewText2" name="reviewText" ng-model="reviewText" rows="4" cols="50"></textarea>
+                        <input type="submit" id="submit2" value="Send Review" class="form-control btn btn-primary">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     </div>
@@ -147,7 +169,7 @@
         <div class="gallery" style="background-color: white; width: 95%; height: 95%">
             <input  type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
                     ng-checked={{isInFavorites(poi)}}><span ng-show="loged">In My Favorites</span>
-            <button ng-show="loged"  ng-click="addReview(poi)">Review</button>
+            <button ng-show="loged"  ng-click="addReview(poi, 3)">Review</button>
 
             <a ng-click="onclick(poi, 'myModalSearchCat')"><img ng-src={{poi.Picture}} height="200" width="400" alt=""/>
                 <header>
@@ -177,7 +199,29 @@
                     </div>
                 </div>
             </div>
+            <form name="addReviewForm" class="search-property-1" ng-submit="sendReview(poi)">
+                <div id="addReview3{{poi.NamePOI}}" class="modal">
+                    <div class="modal-content">
+                        <span ng-click="onXClickSearch(poi.NamePOI, 'addReview3')" class="close">&times;</span>
 
+                        <header>
+                            <h2>Add Review To: {{poi.NamePOI}}</h2>
+                        </header>
+                        <h2>Rank:</h2>
+                        <select id=numRank3{{poi.NamePOI}}" name="numRank" ng-model="numRank">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <!--                <input type="text" name="numRank" ng-model="numRank">-->
+                        <h2>Your Review:</h2>
+                        <textarea id="reviewText3" name="reviewText" ng-model="reviewText" rows="4" cols="50"></textarea>
+                        <input type="submit" id="submit3" value="Send Review" class="form-control btn btn-primary">
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     </div>

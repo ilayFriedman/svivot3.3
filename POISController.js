@@ -74,7 +74,7 @@ angular.module("myApp")
                 $scope.updateAllFavorites = function () {
                     const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                     $http.put(`${localUrl}/private/updateAllFavorites`, $rootScope.userFavorites, headers).then($scope.successAddFavorites, $scope.errorAddFavorites);
-                    $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then($rootScope.successFavorites,  $scope.errorFavorites);
+                    $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then($rootScope.successFavorites, $scope.errorFavorites);
                 }
 
                 $rootScope.successFavorites = function (response) {
@@ -88,21 +88,19 @@ angular.module("myApp")
                     }
                     $window.numOfFavorites = response.data.length;
                 }
-                $scope.errorFavorites = function (response) {}
+                $scope.errorFavorites = function (response) {
+                }
 
 
-                $scope.addReview = function (poi) {
+                $scope.addReview = function (poi, num) {
                     console.log(poi.NamePOI);
-                    var modal = document.getElementById("addReview" + poi.NamePOI);
+                    var modal = document.getElementById("addReview" + num + poi.NamePOI);
                     modal.style.display = "block";
                 }
 
                 $scope.sendReview = function (poi) {
                     const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
                     var numRank = this.numRank;
-                    // var selector = document.getElementById('numRank'+poi.NamePOI);
-                    // var value = selector[selector.selectedIndex].value;
-                    // console.log(value)
                     var text = this.reviewText;
                     const dataR = {namePoi: poi.NamePOI, myRank: numRank};
                     $http.put(`${localUrl}/addRank`, dataR).then($scope.successSendRank, $scope.errorSendRank);
@@ -113,25 +111,37 @@ angular.module("myApp")
 
 
                 $scope.successSendText = function (response) {
-                    alert("text send")
+                    $scope.goodText = true;
+                    $scope.isGoodReview();
                 }
                 $scope.errorSendText = function (response) {
-                    alert("text error")
+                    alert("Please insert text")
+                    $scope.goodText = false;
+                    $scope.isGoodReview();
                 }
 
                 $scope.successSendRank = function (response) {
-                    alert("rank send")
+                    $scope.goodRank = true;
+                    $scope.isGoodReview();
                 }
                 $scope.errorSendRank = function (response) {
-                    alert("rank error")
+                    alert("Please enter rank")
+                    $scope.goodRank = false;
+                    $scope.isGoodReview();
+                }
+
+                $scope.isGoodReview = function(){
+                    if($scope.goodRank && $scope.goodText){
+                        alert("We Got Your Review")
+                    }
                 }
 
 
                 $scope.successAddFavorites = function (Response) {
-                    alert("The POI has added to your favorites")
+                    alert("Your POI are up to date")
                 }
                 $scope.errorAddFavorites = function (Response) {
-                    alert("not added")
+                    //alert("not added")
                 }
 
                 $scope.onclick = function (poi, name) {
