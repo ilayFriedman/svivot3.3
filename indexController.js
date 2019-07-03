@@ -45,10 +45,14 @@ angular.module("myApp").controller("indexController", ['$scope', '$http', '$wind
 
     $rootScope.successReviews = function (response) {
         $rootScope.currReviews = response.data;
-        $rootScope.reviews = $sce.trustAsHtml('Reviews: </br>' +
-            '1: ' + $rootScope.currReviews[0].Details +
-            '</br>' +
-            '2:' + $rootScope.currReviews[1].Details + '</br>')
+        var stringReviews = "";
+        for(var i = 0 ; i <  $rootScope.currReviews .length; i++) {
+            stringReviews +=  i+1 +': </br>&nbsp&nbsp Date: '
+                + new Date($rootScope.currReviews[i].publishDate).toLocaleDateString()
+                + "</br>&nbsp&nbsp By: " + $rootScope.currReviews[i].username
+                + "</br>&nbsp&nbsp Details: " + $rootScope.currReviews[i].Details + '</br>&nbsp';
+        }
+        $rootScope.reviews = $sce.trustAsHtml(stringReviews);
         console.log($sce.reviews)
     }
     $rootScope.errorReviews = function (response) {

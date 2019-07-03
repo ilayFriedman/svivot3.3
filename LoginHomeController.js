@@ -9,6 +9,7 @@ angular.module("myApp").controller("LoginHomeController", ['$scope', '$http', '$
     }
 
     function successFavorites(response) {
+        $window.sessionStorage.setItem('allUserFavorites', JSON.stringify(response.data));
         $window.numOfFavorites = response.data.length;
     }
     $window.getNum = function (isUp) {

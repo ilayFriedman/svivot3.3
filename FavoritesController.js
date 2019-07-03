@@ -1,28 +1,28 @@
 angular.module("myApp")
     .controller("FavoritesController", ['$scope', '$http', '$window', '$rootScope', '$sce',
         function ($scope, $http, $window, $rootScope, $sce) {
-
-            const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
-            $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then(successFavorites, errorFavorites);
-
-
-            function successFavorites(response) {
-                if (response && response.data) {
-                    $scope.favorites = response.data;
-                } else {
-                    errorFavorites("");
-                }
-            }
-
-            function errorFavorites(errorResponse) {
-                if (errorResponse && (errorResponse.status == 401)) {
-                    $scope.errors = [{key: 'errorInFav', value: errorResponse.data}];
-                } else
-                    $scope.errors = [{
-                        key: 'errorInFav',
-                        value: 'Oops we have a problem. Please try again later.'
-                    }];
-            }
+            $scope.favorites = JSON.parse($window.sessionStorage.allUserFavorites);
+            // const headers = {headers: {"x-auth-token": $window.sessionStorage.token}}
+            // $http.post(`${localUrl}/private/getAllFavorites`, null, headers).then(successFavorites, errorFavorites);
+            //
+            //
+            // function successFavorites(response) {
+            //     if (response && response.data) {
+            //         $scope.favorites = response.data;
+            //     } else {
+            //         errorFavorites("");
+            //     }
+            // }
+            //
+            // function errorFavorites(errorResponse) {
+            //     if (errorResponse && (errorResponse.status == 401)) {
+            //         $scope.errors = [{key: 'errorInFav', value: errorResponse.data}];
+            //     } else
+            //         $scope.errors = [{
+            //             key: 'errorInFav',
+            //             value: 'Oops we have a problem. Please try again later.'
+            //         }];
+            // }
 
             $scope.removeToFavorites = function (poi) {
                 console.log(poi.NamePOI)

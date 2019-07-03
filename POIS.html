@@ -25,17 +25,20 @@
         </tr>
     </table>
 
-    <!--    A-Z SORTED-->
+    <button ng-click="updateAllFavorites()">update favorites</button>
+
+    <!--   CATEGORY SORTED-->
     <br>
     <br>
-    <div ng-hide="rank == true || categories == true" ng-repeat="poi in allPOIs | filter:searchName" >
+    <div ng-hide="rank == true || byCat == true" ng-repeat="poi in allPOIs | filter:searchName" >
         <div>
             <a ng-click="onclick(poi, 'myModalSearch')">
                 <header>
                     <h2>{{poi.NamePOI}}</h2>
                 </header>
                 <img ng-src={{poi.Picture}} height="200" width="400" alt=""/></a>
-            <button ng-show="loged" ng-click="addToFavorites(poi)">Add To Favorites</button>
+            <input type="checkbox" ng-show="loged" ng-click="addToFavorites(poi)"
+                   ng-checked={{isInFavorites(poi)}} ng-model="clicked{{poi.NamePOI}}">Add To Favorites</input>
 <!--            <button ng-show="loged" ng-click="addReview(poi)">Add Review</button>-->
             <!-- The Modal -->
             <div id="myModalSearch{{poi.NamePOI}}" class="modal">
@@ -85,11 +88,11 @@
         </form>
 <!--                <button ng-click="sendReview(poi)">Send Review</button>-->
             </div>
-<
+
         </div>
     </div>
     <!--SORT BY RANK-->
-    <div ng-hide="rank == false" ng-hide="categories" ng-repeat="poi in ranked | filter:searchName" style="border: solid">
+    <div ng-hide="rank == false || byCat == true" ng-hide="byCat == true" ng-repeat="poi in ranked | filter:searchName" style="border: solid">
         <div>
             <a ng-click="onclick(poi, 'myModalSearchRank')">
                 <header>
@@ -122,7 +125,7 @@
         </div>
     </div>
     <!--    SORT BY CATEGORY-->
-    <div ng-hide="rank == true" ng-repeat="poi in categorySorted | filter:searchName" >
+    <div ng-show ="byCat == true"  ng-repeat="poi in categorySorted | filter:searchName" >
         <div>
             <a ng-click="onclick(poi, 'myModalSearchCat')">
                 <header>
